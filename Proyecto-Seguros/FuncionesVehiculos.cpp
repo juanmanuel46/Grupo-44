@@ -8,57 +8,99 @@
 using namespace std;
 
 void agregarVehiculo() {
-    Vehiculo v;
+    Vehiculo nuevoVehiculo;
     cout << "--- AGREGAR VEHICULO ---\n";
-    v.cargar();
-    if (v.guardarEnDisco()) {
-        cout << "Vehiculo guardado correctamente.\n";
-    } else {
-        cout << "Error al guardar el vehiculo.\n";
+
+    nuevoVehiculo.cargarId();
+
+    Vehiculo v;
+    ifstream archivo("vehiculos.dat", ios::binary);
+    if (archivo) {
+        while (archivo.read(reinterpret_cast<char*>(&v), sizeof(Vehiculo))) {
+            if (v.getIdVehiculo() == nuevoVehiculo.getIdVehiculo()) {
+                cout << "Error: ya existe un vehiculo con el ID " << v.getIdVehiculo() << ".\n";
+                archivo.close();
+                system("pause");
+                return;
+            }
+        }
+        archivo.close();
     }
+
+    nuevoVehiculo.cargarDatos();
+
+    ofstream archi("vehiculos.dat", ios::app | ios::binary);
+    if (!archi) {
+        cout << "No se pudo abrir el archivo para escribir.\n";
+        system("pause");
+        return;
+    }
+
+    archi.write(reinterpret_cast<char*>(&nuevoVehiculo), sizeof(Vehiculo));
+    archi.close();
+
+    cout << "\nVehiculo guardado con éxito.\n\n";
     system("pause");
 }
 
 void listarVehiculos() {
     Vehiculo v;
     int pos = 0;
-    bool hayVehiculos = false;
+    bool hayVehiculosActivos = false;
 
-    cout << "--- LISTADO DE VEHICULOS ---\n";
-    while (v.leerDeDisco(pos)) {
-         if (v.getActivo()) {
+    system("cls");
+    cout << "LISTADO DE VEHICULOS\n";
+    cout << "--------------------------------\n";
+
+    ifstream archi("vehiculos.dat", ios::binary);
+    if (!archi.is_open()) {
+        cout << "No se pudo abrir el archivo para lectura.\n";
+        cout << "No hay vehiculos cargados.\n";
+        system("pause");
+        return;
+    }
+
+    while (archi.read(reinterpret_cast<char*>(&v), sizeof(Vehiculo))) {
+        if (v.getActivo()) {
             cout << "Vehiculo #" << pos + 1 << endl;
             v.mostrar();
-            hayVehiculos = true;
-         }
+            hayVehiculosActivos = true;
+        }
         pos++;
     }
 
-    if (!hayVehiculos) {
-        cout << "No hay vehiculos cargados.\n";
-    }
+    archi.close();
 
-    system("pause");
+    if (!hayVehiculosActivos) {
+        cout << "No hay vehiculos activos cargados para mostrar.\n";
+    }
 }
 
 void modificarVehiculo() {
     Vehiculo v;
-    int idBuscado;
+    string entrada;
     bool encontrado = false;
     bool intentarDeNuevo = true;
 
-    do {
+    while (intentarDeNuevo) {
         system("cls");
         cout << "--- MODIFICAR VEHICULO ---\n";
-        cout << "Ingrese el ID del vehiculo a modificar (Ingrese 0 para cancelar): ";
-        cin >> idBuscado;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Ingrese el ID del vehiculo a modificar (Ingrese S para cancelar): ";
+        getline(cin, entrada);
 
-        if (idBuscado == 0) {
-            cout << "Modificacion de vehiculo cancelada.\n";
+        if (entrada == "S" || entrada == "s") {
+            cout << "Modificación de vehiculo cancelada.\n";
             intentarDeNuevo = false;
-            system("pause");
             break;
+        }
+
+        int idBuscado;
+        try {
+            idBuscado = stoi(entrada);
+        } catch (...) {
+            cout << "Entrada invalida. Debe ingresar un numero o 'S' para salir.\n";
+            system("pause");
+            continue;
         }
 
         fstream archi("vehiculos.dat", ios::in | ios::out | ios::binary);
@@ -76,9 +118,9 @@ void modificarVehiculo() {
             if (v.getIdVehiculo() == idBuscado) {
                 encontrado = true;
                 if (v.getActivo()) {
-                    cout << "Vehiculo encontrado:\n";
+                    cout << "\nVehiculo encontrado:\n";
                     v.mostrar();
-                    cout << "Ingrese los NUEVOS datos:\n";
+                    cout << "\nIngrese los NUEVOS datos:\n";
 
                     int originalId = v.getIdVehiculo();
                     v.cargar();
@@ -88,9 +130,9 @@ void modificarVehiculo() {
                     archi.seekp(pos * sizeof(Vehiculo));
                     archi.write(reinterpret_cast<char*>(&v), sizeof(Vehiculo));
 
-                    cout << "Vehiculo modificado exitosamente.\n";
+                    cout << "\nVehiculo modificado exitosamente.\n";
                 } else {
-                    cout << "El vehiculo con ID " << idBuscado << " se encuentra dado de baja logica y no puede ser modificado.\n";
+                    cout << "El vehiculo con ID " << idBuscado << " esta dado de baja y no puede ser modificado.\n";
                 }
                 system("pause");
                 break;
@@ -105,10 +147,8 @@ void modificarVehiculo() {
         } else {
             intentarDeNuevo = false;
         }
-
-    } while (intentarDeNuevo);
+    }
 }
-
 
 void eliminarVehiculo() {
     Vehiculo v;
@@ -159,7 +199,7 @@ void eliminarVehiculo() {
                         archi.seekp(pos * sizeof(Vehiculo));
                         archi.write(reinterpret_cast<char*>(&v), sizeof(Vehiculo));
 
-                        cout << "Vehiculo eliminado logicamente (dado de baja) exitosamente.\n";
+                        cout << "Vehiculo eliminado exitosamente.\n";
                     } else {
                         cout << "Eliminacion cancelada por el usuario.\n";
                     }

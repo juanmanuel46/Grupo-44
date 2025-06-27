@@ -1,23 +1,124 @@
 #include "Cliente.h"
 #include <iostream>
-#include <fstream>
 #include <cstring>
+#include <limits>
+
 using namespace std;
 
 Cliente::Cliente() {
-    id = 0;
-    memset(nombre, 0, sizeof(nombre));
-    memset(apellido, 0, sizeof(apellido));
-    memset(dni, 0, sizeof(dni));
-    memset(telefono, 0, sizeof(telefono));
-    estado = true;
+    idCliente = 0;
+    strcpy(nombre, "");
+    strcpy(apellido, "");
+    dni = 0;
+    fechaNacimiento = 0;
+    strcpy(domicilio, "");
+    strcpy(email, "");
+    strcpy(telefono, "");
+    activo = true;
 }
 
-void Cliente::cargar() {
-    cout << "ID: ";
-    cin >> id;
-    cin.ignore();
+// Getters
 
+int Cliente::getIdCliente() const {
+    return idCliente;
+}
+
+const char* Cliente::getNombre() const {
+    return nombre;
+}
+
+const char* Cliente::getApellido() const {
+    return apellido;
+}
+
+int Cliente::getDni() const {
+    return dni;
+}
+
+int Cliente::getFechaNacimiento() const {
+    return fechaNacimiento;
+}
+
+bool Cliente::getActivo() const {
+    return activo;
+}
+
+const char* Cliente::getDomicilio() const {
+    return domicilio;
+}
+
+const char* Cliente::getEmail() const {
+    return email;
+}
+
+const char* Cliente::getTelefono() const {
+    return telefono;
+}
+
+// Setters
+
+void Cliente::setIdCliente(int valor) {
+    idCliente = valor;
+}
+
+void Cliente::setNombre(const char* valor) {
+    strncpy(nombre, valor, sizeof(nombre) - 1);
+    nombre[sizeof(nombre) - 1] = '\0';
+}
+
+void Cliente::setApellido(const char* valor) {
+    strncpy(apellido, valor, sizeof(apellido) - 1);
+    apellido[sizeof(apellido) - 1] = '\0';
+}
+
+void Cliente::setDni(int valor) {
+    dni = valor;
+}
+
+void Cliente::setFechaNacimiento(int valor) {
+    fechaNacimiento = valor;
+}
+
+void Cliente::setActivo(bool valor) {
+    activo = valor;
+}
+
+void Cliente::setDomicilio(const char* valor) {
+    strncpy(domicilio, valor, sizeof(domicilio) - 1);
+    domicilio[sizeof(domicilio) - 1] = '\0';
+}
+
+void Cliente::setEmail(const char* valor) {
+    strncpy(email, valor, sizeof(email) - 1);
+    email[sizeof(email) - 1] = '\0';
+}
+
+void Cliente::setTelefono(const char* valor) {
+    strncpy(telefono, valor, sizeof(telefono) - 1);
+    telefono[sizeof(telefono) - 1] = '\0';
+}
+
+// Métodos funcionales
+
+void Cliente::mostrar() const {
+    cout << "ID Cliente: " << idCliente << endl;
+    cout << "Nombre: " << nombre << endl;
+    cout << "Apellido: " << apellido << endl;
+    cout << "DNI: " << dni << endl;
+    cout << "Fecha de nacimiento: " << fechaNacimiento << endl;
+    cout << "Domicilio: " << domicilio << endl;
+    cout << "Email: " << email << endl;
+    cout << "Telefono: " << telefono << endl;
+    cout << "-------------------------\n";
+}
+
+void Cliente::cargarId() {
+    cout << "Ingrese ID del cliente: ";
+    cin >> idCliente;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+void Cliente::cargarDatos() {
     cout << "Nombre: ";
     cin.getline(nombre, sizeof(nombre));
 
@@ -25,62 +126,26 @@ void Cliente::cargar() {
     cin.getline(apellido, sizeof(apellido));
 
     cout << "DNI: ";
-    cin.getline(dni, sizeof(dni));
+    cin >> dni;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    cout << "Fecha de nacimiento (AAAAMMDD): ";
+    cin >> fechaNacimiento;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    cout << "Domicilio: ";
+    cin.getline(domicilio, sizeof(domicilio));
+
+    cout << "Email: ";
+    cin.getline(email, sizeof(email));
 
     cout << "Telefono: ";
     cin.getline(telefono, sizeof(telefono));
-    estado = true;
+
+    activo = true;
 }
 
-void Cliente::mostrar() {
-    if (estado) {
-        cout << "ID: " << id << endl;
-        cout << "Nombre: " << nombre << endl;
-        cout << "Apellido: " << apellido << endl;
-        cout << "DNI: " << dni << endl;
-        cout << "Telefono: " << telefono << endl;
-        cout << "-------------------------\n";
-    }
-}
-
-int Cliente::getId() {
-    return id;
-}
-
-void Cliente::setId(int nuevoId) {
-    id = nuevoId;
-}
-
-bool Cliente::getEstado() {
-    return estado;
-}
-
-void Cliente::setEstado(bool nuevoEstado) {
-    estado = nuevoEstado;
-}
-
-bool Cliente::guardarEnDisco() {
-    ofstream archi("clientes.dat", ios::app | ios::binary);
-    if (!archi.is_open()) return false;
-    archi.write(reinterpret_cast<char*>(this), sizeof(*this));
-    archi.close();
-    return true;
-}
-
-bool Cliente::leerDeDisco(int pos) {
-    ifstream archi("clientes.dat", ios::binary);
-    if (!archi.is_open()) return false;
-    archi.seekg(pos * sizeof(*this));
-    bool exito = archi.read(reinterpret_cast<char*>(this), sizeof(*this)).good();
-    archi.close();
-    return exito;
-}
-
-bool Cliente::modificarEnDisco(int pos) {
-    fstream archi("clientes.dat", ios::in | ios::out | ios::binary);
-    if (!archi.is_open()) return false;
-    archi.seekp(pos * sizeof(*this));
-    archi.write(reinterpret_cast<char*>(this), sizeof(*this));
-    archi.close();
-    return true;
+void Cliente::cargar() {
+    cargarId();
+    cargarDatos();
 }

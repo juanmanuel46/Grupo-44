@@ -34,10 +34,14 @@
 		</Compiler>
 		<Unit filename="Cliente.cpp" />
 		<Unit filename="FuncionesClientes.cpp" />
+		<Unit filename="FuncionesSiniestro.cpp" />
+		<Unit filename="FuncionesSiniestro.h" />
 		<Unit filename="FuncionesVehiculos.cpp" />
 		<Unit filename="FuncionesVehiculos.h" />
 		<Unit filename="Menu.cpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="siniestro.cpp" />
+		<Unit filename="siniestro.h" />
 		<Unit filename="vehiculo.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

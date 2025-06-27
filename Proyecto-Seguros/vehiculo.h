@@ -15,6 +15,8 @@ public:
     Vehiculo();
 
     void cargar();
+    void cargarId();
+    void cargarDatos();
     void mostrar();
 
     int getIdVehiculo();
@@ -30,8 +32,5 @@ public:
     void setAnio(int valor);
     void setActivo(bool valor);
     void setPatente(const char* valor);
-
-    bool guardarEnDisco();
-    bool leerDeDisco(int pos);
 };
 #endif

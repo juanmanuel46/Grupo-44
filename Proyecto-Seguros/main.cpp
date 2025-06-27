@@ -5,6 +5,7 @@
 #include "Menu.h"
 #include "FuncionesClientes.h"
 #include "FuncionesVehiculos.h"
+#include "FuncionesSiniestro.h"
 
 using namespace std;
 
@@ -165,10 +166,10 @@ void menuSiniestros() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch(opcion) {
-            case 1: cout << "Listado de siniestros...\n"; system("pause"); break;
-            case 2: cout << "Agregar siniestro...\n"; system("pause"); break;
-            case 3: cout << "Modificar siniestro...\n"; system("pause"); break;
-            case 4: cout << "Eliminar siniestro...\n"; system("pause"); break;
+            case 1: listarSiniestro(); break;
+            case 2: agregarSiniestro(); break;
+            case 3: modificarSiniestro(); break;
+            case 4: eliminarSiniestro(); break;
             case 0:
                 salirSubmenu = true;
                 break;

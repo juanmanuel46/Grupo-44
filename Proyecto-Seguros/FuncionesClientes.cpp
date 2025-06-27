@@ -7,13 +7,38 @@
 using namespace std;
 
 void agregarCliente() {
-    Cliente cli;
-    cli.cargar();
-    if (cli.guardarEnDisco()) {
-        cout << "Cliente guardado correctamente.\n";
-    } else {
-        cout << "Error al guardar el cliente.\n";
+    Cliente nuevoCliente;
+    cout << "--- AGREGAR CLIENTE ---\n";
+
+    nuevoCliente.cargarId();
+
+    Cliente c;
+    ifstream archivo("clientes.dat", ios::binary);
+    if (archivo) {
+        while (archivo.read(reinterpret_cast<char*>(&c), sizeof(Cliente))) {
+            if (c.getIdCliente() == nuevoCliente.getIdCliente()) {
+                cout << "Error: ya existe un cliente con el ID " << c.getIdCliente() << ".\n";
+                archivo.close();
+                system("pause");
+                return;
+            }
+        }
+        archivo.close();
     }
+
+    nuevoCliente.cargarDatos();
+
+    ofstream archi("clientes.dat", ios::app | ios::binary);
+    if (!archi) {
+        cout << "No se pudo abrir el archivo para escribir.\n";
+        system("pause");
+        return;
+    }
+
+    archi.write(reinterpret_cast<char*>(&nuevoCliente), sizeof(Cliente));
+    archi.close();
+
+    cout << "\nCliente guardado con éxito.\n\n";
     system("pause");
 }
 
@@ -35,7 +60,7 @@ void listarClientes() {
     }
 
     while (archi.read(reinterpret_cast<char*>(&cli), sizeof(Cliente))) {
-        if (cli.getEstado()) {
+        if (cli.getActivo()) {
             cout << "Cliente #" << pos + 1 << endl;
             cli.mostrar();
             hayClientesActivos = true;
@@ -48,100 +73,151 @@ void listarClientes() {
     if (!hayClientesActivos) {
         cout << "No hay clientes cargados para mostrar.\n";
     }
-
-    system("pause");
 }
 
 void modificarCliente() {
     Cliente cli;
-    int idBuscado;
-    cout << "Ingrese el ID del cliente a modificar: ";
-    cin >> idBuscado;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    int pos = 0;
+    string entrada;
     bool encontrado = false;
+    bool intentarDeNuevo = true;
 
-    fstream archi("clientes.dat", ios::in | ios::out | ios::binary);
-    if (!archi) {
-        cout << "Error al abrir archivo de clientes para modificar.\n";
-        system("pause");
-        return;
-    }
+    while (intentarDeNuevo) {
+        system("cls");
+        cout << "--- MODIFICAR CLIENTE ---\n";
+        cout << "Ingrese el ID del cliente a modificar (Ingrese S para cancelar): ";
+        getline(cin, entrada);
 
-    while (archi.read(reinterpret_cast<char*>(&cli), sizeof(Cliente))) {
-        if (cli.getId() == idBuscado) {
-            encontrado = true;
-            if (cli.getEstado()) {
-                cout << "Cliente encontrado:\n";
-                cli.mostrar();
-                cout << "Ingrese los NUEVOS datos:\n";
-
-                int originalId = cli.getId();
-                cli.cargar();
-                cli.setId(originalId);
-
-                archi.seekp(pos * sizeof(Cliente));
-                archi.write(reinterpret_cast<char*>(&cli), sizeof(Cliente));
-
-                cout << "Cliente modificado exitosamente.\n";
-            } else {
-                cout << "El cliente con ID " << idBuscado << " se encuentra dado de baja logica y no puede ser modificado.\n";
-            }
+        if (entrada == "S" || entrada == "s") {
+            cout << "Modificación de cliente cancelada.\n";
+            intentarDeNuevo = false;
             break;
         }
-        pos++;
+
+        int idBuscado;
+        try {
+            idBuscado = stoi(entrada);
+        } catch (...) {
+            cout << "Entrada inválida. Debe ingresar un número o 'S' para salir.\n";
+            system("pause");
+            continue;
+        }
+
+        fstream archi("clientes.dat", ios::in | ios::out | ios::binary);
+        if (!archi) {
+            cout << "Error al abrir archivo de clientes.\n";
+            system("pause");
+            intentarDeNuevo = false;
+            break;
+        }
+
+        int pos = 0;
+        encontrado = false;
+
+        while (archi.read(reinterpret_cast<char*>(&cli), sizeof(Cliente))) {
+            if (cli.getIdCliente() == idBuscado) {
+                encontrado = true;
+                if (cli.getActivo()) {
+                    cout << "\nCliente encontrado:\n";
+                    cli.mostrar();
+                    cout << "\nIngrese los NUEVOS datos:\n";
+
+                    int originalId = cli.getIdCliente();
+                    cli.cargar();
+                    cli.setIdCliente(originalId);
+
+                    archi.seekp(pos * sizeof(Cliente));
+                    archi.write(reinterpret_cast<char*>(&cli), sizeof(Cliente));
+
+                    cout << "\nCliente modificado exitosamente.\n";
+                } else {
+                    cout << "El cliente con ID " << idBuscado << " está dado de baja y no puede ser modificado.\n";
+                }
+                system("pause");
+                break;
+            }
+            pos++;
+        }
+        archi.close();
+
+        if (!encontrado) {
+            cout << "Cliente con ID " << idBuscado << " no encontrado. Intente de nuevo.\n";
+            system("pause");
+        } else {
+            intentarDeNuevo = false;
+        }
     }
-
-    archi.close();
-
-    if (!encontrado) {
-        cout << "Cliente no encontrado.\n";
-    }
-
-    system("pause");
 }
-
 
 void eliminarCliente() {
     Cliente cli;
     int idBuscado;
-    cout << "Ingrese el ID del cliente a dar de baja (eliminacion logica): ";
-    cin >> idBuscado;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    int pos = 0;
     bool encontrado = false;
+    bool intentarDeNuevo = true;
 
-    fstream archi("clientes.dat", ios::in | ios::out | ios::binary);
-    if (!archi) {
-        cout << "Error al abrir archivo de clientes para eliminacion logica.\n";
-        system("pause");
-        return;
-    }
+    do {
+        system("cls");
+        cout << "--- ELIMINAR CLIENTE (Baja Logica) ---\n";
+        cout << "Ingrese el ID del cliente a eliminar (Ingrese 0 para cancelar): ";
+        cin >> idBuscado;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    while (archi.read(reinterpret_cast<char*>(&cli), sizeof(Cliente))) {
-        if (cli.getId() == idBuscado) {
-            encontrado = true;
-            if (cli.getEstado()) {
-                cli.setEstado(false);
-                archi.seekp(pos * sizeof(Cliente));
-                archi.write(reinterpret_cast<char*>(&cli), sizeof(Cliente));
-
-                cout << "Cliente con ID " << idBuscado << " dado de baja logicamente.\n";
-            } else {
-                cout << "El cliente con ID " << idBuscado << " ya se encuentra dado de baja logica.\n";
-            }
+        if (idBuscado == 0) {
+            cout << "Eliminacion de cliente cancelada.\n";
+            intentarDeNuevo = false;
+            system("pause");
             break;
         }
-        pos++;
-    }
 
-    archi.close();
+        fstream archi("clientes.dat", ios::in | ios::out | ios::binary);
+        if (!archi) {
+            cout << "Error al abrir archivo de clientes. Es posible que no exista.\n";
+            system("pause");
+            intentarDeNuevo = false;
+            break;
+        }
 
-    if (!encontrado) {
-        cout << "Cliente no encontrado.\n";
-    }
+        int pos = 0;
+        encontrado = false;
 
-    system("pause");
+        while (archi.read(reinterpret_cast<char*>(&cli), sizeof(Cliente))) {
+            if (cli.getIdCliente() == idBuscado) {
+                encontrado = true;
+                if (cli.getActivo()) {
+                    cout << "Cliente encontrado:\n";
+                    cli.mostrar();
+                    char confirmacion;
+                    cout << "¿Esta seguro de eliminar este cliente (S/N)? ";
+                    cin >> confirmacion;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    confirmacion = toupper(confirmacion);
+
+                    if (confirmacion == 'S') {
+                        cli.setActivo(false);
+                        archi.seekp(pos * sizeof(Cliente));
+                        archi.write(reinterpret_cast<char*>(&cli), sizeof(Cliente));
+
+                        cout << "Cliente eliminado exitosamente.\n";
+                    } else {
+                        cout << "Eliminacion cancelada por el usuario.\n";
+                    }
+                } else {
+                    cout << "El cliente con ID " << idBuscado << " ya se encuentra dado de baja logica.\n";
+                }
+                system("pause");
+                break;
+            }
+            pos++;
+        }
+
+        archi.close();
+
+        if (!encontrado) {
+            cout << "Cliente con ID " << idBuscado << " no encontrado. Intente de nuevo.\n";
+            system("pause");
+        } else {
+            intentarDeNuevo = false;
+        }
+
+    } while (intentarDeNuevo);
 }
+
