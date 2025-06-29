@@ -20,6 +20,6 @@ class ArchivoPropietario{
         int modificarRegistro(Propietario reg, int pos);
         int contarRegistros();
         bool bajaLogica(const char* _dni);
-        bool altaLogica(const char* _dni);
+        bool altalogica(const char* _dni);
     };
 
