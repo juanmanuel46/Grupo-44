@@ -11,7 +11,7 @@ int ArchivoCliente::buscarCliente(int idCliente) {
     pCliente = fopen(nombre, "rb");
 
     if (pCliente == nullptr) {
-        return -2; // Error de archivo
+        return -2; 
     }
 
     int pos = 0;
@@ -24,28 +24,28 @@ int ArchivoCliente::buscarCliente(int idCliente) {
     }
 
     fclose(pCliente);
-    return -1; // No encontrado
+    return -1; 
 }
 
 int ArchivoCliente::agregarRegistro() {
     Cliente nuevoCliente;
     cout << "--- AGREGAR CLIENTE ---" << endl;
 
-    nuevoCliente.cargarId(); // Asumo que este método pide y carga solo el ID.
+    nuevoCliente.cargarId();
 
     if (buscarCliente(nuevoCliente.getIdCliente()) != -1) {
         cout << "Error: ya existe un cliente con el ID " << nuevoCliente.getIdCliente() << "." << endl;
         system("pause");
-        return -2; // ID Duplicado
+        return -2; 
     }
     
-    nuevoCliente.cargarDatos(); // Asumo que este método pide y carga el resto de los datos.
+    nuevoCliente.cargarDatos(); 
 
     FILE *pCliente;
     pCliente = fopen(nombre, "ab");
     if (pCliente == nullptr) {
         cout << "No se pudo abrir el archivo para escribir." << endl;
-        return -1; // Error de apertura en modo escritura
+        return -1; 
     }
 
     int escribio = fwrite(&nuevoCliente, tamanioRegistro, 1, pCliente);
