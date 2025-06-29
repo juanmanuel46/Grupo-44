@@ -1,9 +1,9 @@
 #include <iostream>
 #include <cstdlib>
 #include "Menu.h"
-#include "FuncionesClientes.h"
+#include "ArchivosClientes.h"
 
 using namespace std;
 
-// Todo tu código de los menús acá
+// Todo tu cï¿½digo de los menï¿½s acï¿½
 //...
