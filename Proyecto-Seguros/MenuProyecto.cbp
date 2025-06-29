@@ -39,6 +39,8 @@
 		<Unit filename="FuncionesVehiculos.cpp" />
 		<Unit filename="FuncionesVehiculos.h" />
 		<Unit filename="Menu.cpp" />
+		<Unit filename="Poliza.cpp" />
+		<Unit filename="Poliza.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="siniestro.cpp" />
 		<Unit filename="siniestro.h" />
