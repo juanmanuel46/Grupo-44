@@ -120,14 +120,12 @@
 
 1750984321 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\cliente.h
 
-1750984850 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionesclientes.cpp
 	<iostream>
 	<fstream>
 	"Cliente.h"
 	<cstdlib>
 	<limits>
 
-1750984631 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionesvehiculos.cpp
 	<iostream>
 	<fstream>
 	<limits>
@@ -169,7 +167,6 @@
 	<cstring>
 	<limits>
 
-1750983258 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionessiniestro.cpp
 	"funcionesSiniestro.h"
 	"siniestro.h"
 	<iostream>
