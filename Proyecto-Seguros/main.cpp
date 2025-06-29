@@ -4,8 +4,8 @@
 #include <cctype>
 #include "Menu.h"
 #include "ArchivosClientes.h"
-#include "FuncionesVehiculos.h"
-#include "FuncionesSiniestro.h"
+#include "ArchivosVehiculos.h"
+#include "ArchivosSiniestro.h"
 
 using namespace std;
 
@@ -73,6 +73,9 @@ void menuPrincipal() {
 }
 
 void menuClientes() {
+
+    ArchivoCliente archivoCli; 
+
     int opcion;
     bool salirSubmenu = false;
     do {
@@ -89,11 +92,25 @@ void menuClientes() {
         cin >> opcion;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        switch(opcion) {
-            case 1: listarRegistros(); break;
-            case 2: agregarRegistros(); break;
-            case 3: modificarRegistro(); break;
-            case 4: bajaLogica(); break;
+         switch(opcion) {
+            case 1:
+                archivoCli.listarRegistros(); 
+                break;
+            case 2:
+                archivoCli.agregarRegistro(); 
+                break;
+            case 3:
+                archivoCli.modificarDatosCliente(); 
+                break;
+            case 4:
+                { 
+                    int id;
+                    cout << "Ingrese el ID del cliente a eliminar: ";
+                    cin >> id;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    archivoCli.bajaLogica(id); 
+                }
+                break;
             case 0:
                 salirSubmenu = true;
                 break;
@@ -149,27 +166,44 @@ void menuPolizas() {
 }
 
 void menuSiniestros() {
+
+    ArchivoSiniestro archivoSin; 
+
     int opcion;
     bool salirSubmenu = false;
     do {
         system("cls");
-        cout << "Siniestros\n";
+        cout << "Clientes\n";
         cout << "-----------------------------\n";
-        cout << "1 - Listar Siniestro\n";
-        cout << "2 - Agregar Siniestro\n";
-        cout << "3 - Modificar Siniestro\n";
-        cout << "4 - Eliminar Siniestro\n";
+        cout << "1 - Listar Clientes\n";
+        cout << "2 - Agregar Cliente\n";
+        cout << "3 - Modificar Cliente\n";
+        cout << "4 - Eliminar Cliente\n";
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
         cin >> opcion;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        switch(opcion) {
-            case 1: listarSiniestro(); break;
-            case 2: agregarSiniestro(); break;
-            case 3: modificarSiniestro(); break;
-            case 4: eliminarSiniestro(); break;
+         switch(opcion) {
+            case 1:
+                archivoSin.listarRegistros(); 
+                break;
+            case 2:
+                archivoSin.agregarRegistro(); 
+                break;
+            case 3:
+                archivoSin.modificarDatosSiniestro(); 
+                break;
+            case 4:
+                { 
+                    int id;
+                    cout << "Ingrese el ID del cliente a eliminar: ";
+                    cin >> id;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    archivoSin.bajaLogica(); 
+                }
+                break;
             case 0:
                 salirSubmenu = true;
                 break;
@@ -178,37 +212,52 @@ void menuSiniestros() {
                 system("pause");
                 break;
         }
-
         if (opcion >= 1 && opcion <= 4) {
             if (preguntarVolverMenuPrincipal()) {
-                salirSubmenu = true;
-            }
+                salirSubmenu = true;}
         }
     } while (!salirSubmenu);
 }
 
-void menuVehiculos() {
+void menuSiniestros() {
+
+    ArchivoVehiculo archivoVeh; 
+
     int opcion;
     bool salirSubmenu = false;
     do {
         system("cls");
-        cout << "Vehiculos\n";
+        cout << "Clientes\n";
         cout << "-----------------------------\n";
-        cout << "1 - Listar Vehiculos\n";
-        cout << "2 - Agregar Vehiculo\n";
-        cout << "3 - Modificar Vehiculo\n";
-        cout << "4 - Eliminar Vehiculo\n";
+        cout << "1 - Listar Clientes\n";
+        cout << "2 - Agregar Cliente\n";
+        cout << "3 - Modificar Cliente\n";
+        cout << "4 - Eliminar Cliente\n";
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
         cin >> opcion;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        switch(opcion) {
-            case 1: listarVehiculos(); break;
-            case 2: agregarVehiculo(); break;
-            case 3: modificarVehiculo(); break;
-            case 4: eliminarVehiculo(); break;
+         switch(opcion) {
+            case 1:
+                archivoVeh.listarRegistros(); 
+                break;
+            case 2:
+                archivoVeh.agregarRegistro(); 
+                break;
+            case 3:
+                archivoVeh.modificarDatosVehiculo(); 
+                break;
+            case 4:
+                { 
+                    int id;
+                    cout << "Ingrese el ID del cliente a eliminar: ";
+                    cin >> id;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    archivoVeh.bajaLogica(); 
+                }
+                break;
             case 0:
                 salirSubmenu = true;
                 break;
@@ -217,11 +266,9 @@ void menuVehiculos() {
                 system("pause");
                 break;
         }
-
         if (opcion >= 1 && opcion <= 4) {
             if (preguntarVolverMenuPrincipal()) {
-                salirSubmenu = true;
-            }
+                salirSubmenu = true;}
         }
     } while (!salirSubmenu);
 }
