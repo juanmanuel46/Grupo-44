@@ -3,7 +3,7 @@
 #include <limits>
 #include <cctype>
 #include "Menu.h"
-#include "FuncionesClientes.h"
+#include "ArchivosClientes.h"
 #include "FuncionesVehiculos.h"
 #include "FuncionesSiniestro.h"
 
@@ -90,10 +90,10 @@ void menuClientes() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch(opcion) {
-            case 1: listarClientes(); break;
-            case 2: agregarCliente(); break;
-            case 3: modificarCliente(); break;
-            case 4: eliminarCliente(); break;
+            case 1: listarRegistros(); break;
+            case 2: agregarRegistros(); break;
+            case 3: modificarRegistro(); break;
+            case 4: bajaLogica(); break;
             case 0:
                 salirSubmenu = true;
                 break;
