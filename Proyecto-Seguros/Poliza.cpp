@@ -25,7 +25,7 @@ const char* Poliza::getPatente() const { return _patente; }
 const Fecha& Poliza::getFechaInicio() const { return _fechaInicio; }
 const Fecha& Poliza::getFechaVencimiento() const { return _fechaVencimiento; }
 const char* Poliza::getNombre() const { return _nombre; }
-const char* Poliza::getApellido() const { return _apellido; }  // Añadido (faltaba en .h)
+const char* Poliza::getApellido() const { return _apellido; }  // Aï¿½adido (faltaba en .h)
 const char* Poliza::getDetalleCobertura() const { return _detalleCobertura; }
 float Poliza::getImporteMensual() const { return _importeMensual; }
 bool Poliza::isActivo() const { return _activo; }  // Corregido: _activo
@@ -43,7 +43,7 @@ void Poliza::setNombre(const char* nombre) {
     strncpy(_nombre, nombre, 9);
     _nombre[9] = '\0';
 }
-void Poliza::setApellido(const char* apellido) {  // Añadido (faltaba en .h)
+void Poliza::setApellido(const char* apellido) {  // Aï¿½adido (faltaba en .h)
     strncpy(_apellido, apellido, 9);
     _apellido[9] = '\0';
 }
@@ -63,9 +63,9 @@ void Poliza::mostrar() const {
     cout << "DNI: " << _dni << endl;
     cout << "Patente: " << _patente << endl;
     cout << "Fecha de inicio: ";
-//    _fechaInicio.mostrar();  // Suponiendo que hay un método mostrar() en la clase Fecha
+    _fechaInicio.mostrar();  
     cout << "Fecha de vencimiento: ";
- //   _fechaVencimiento.mostrar();  // Igual que arriba
+   _fechaVencimiento.mostrar(); 
     cout << "Nombre: " << _nombre << endl;
     cout << "Apellido: " << _apellido << endl;
     cout << "Detalle de cobertura: " << _detalleCobertura << endl;
@@ -78,7 +78,7 @@ void Poliza::mostrar() const {
 
 
 void Poliza::cargarId() {
-    cout << "Ingrese número de póliza: ";
+    cout << "Ingrese nï¿½mero de pï¿½liza: ";
     cin >> _numeroPoliza;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -90,14 +90,14 @@ void Poliza::cargarDatos(){
     cin >> _dni;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout << "Ingrese patente del vehículo: ";
+    cout << "Ingrese patente del vehï¿½culo: ";
     cin.getline(_patente, 10);
 
     cout << "Ingrese fecha de inicio:" << endl;
-    //_fechaInicio.cargar();  // Debes tener un método cargar() en la clase Fecha
+    _fechaInicio.cargar();  // Debes tener un mï¿½todo cargar() en la clase Fecha
 
-    cout << "Ingrese fecha de vencimiento:" << endl;
-    //_fechaVencimiento.cargar();
+    cout << "Ingrese Fecha de vencimiento: ";
+    _fechaVencimiento.mostrar();
 
     cout << "Ingrese nombre del titular: ";
     cin.getline(_nombre, 10);
@@ -112,7 +112,7 @@ void Poliza::cargarDatos(){
     cin >> _importeMensual;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout << "¿La póliza está activa? (1 para sí, 0 para no): ";
+    cout << "ï¿½La pï¿½liza estï¿½ activa? (1 para sï¿½, 0 para no): ";
     cin >> _activo;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
