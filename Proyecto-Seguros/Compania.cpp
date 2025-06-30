@@ -14,19 +14,19 @@ Compania::Compania() {
 
 // Getters
 
-const char* Compania::getNombre() const {
+const char* Compania::getNombre()  {
     return _nombre;
 }
 
-int Compania::getId() const {
+int Compania::getId()  {
     return _id;
 }
 
-float Compania::getComision() const {
+float Compania::getComision()  {
     return _comision;
 }
 
-bool Compania::getActivo() const {
+bool Compania::getActivo()  {
     return _activo;
 }
 
@@ -51,7 +51,7 @@ void Compania::setActivo(bool valor) {
 
 // Métodos funcionales
 
-void Compania::mostrar() const {
+void Compania::mostrar()  {
     cout << "ID Compania: " << _id << endl;
     cout << "Nombre: " << _nombre << endl;
     cout << "Comision: " << _comision << endl;

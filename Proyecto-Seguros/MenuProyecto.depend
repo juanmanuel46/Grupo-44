@@ -112,49 +112,43 @@
 	<cstring>
 	<limits>
 
-1750984396 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\cliente.cpp
+1751325406 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\cliente.cpp
 	"Cliente.h"
+	"Fecha.h"
 	<iostream>
 	<cstring>
 	<limits>
 
-1750984321 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\cliente.h
-	<iostream>
-	<fstream>
-	"Cliente.h"
-	<cstdlib>
-	<limits>
-	<iostream>
-	<fstream>
-	<limits>
-	<cstdlib>
-	"Vehiculo.h"
-	"FuncionesVehiculos.h"
+1751325427 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\cliente.h
+	"Fecha.h"
 
 1750984321 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\vehiculo.h
 	<cstring>
 
 1750718028 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionesvehiculos.h
 
-1750050306 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\menu.cpp
-	<iostream>
-	<cstdlib>
-	"Menu.h"
-	"FuncionesClientes.h"
-
-1750050306 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\menu.h
-
-1750713277 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionesclientes.h
-
-1750980348 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\main.cpp
+1751325340 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\menu.cpp
 	<iostream>
 	<cstdlib>
 	<limits>
 	<cctype>
 	"Menu.h"
-	"FuncionesClientes.h"
-	"FuncionesVehiculos.h"
-	"FuncionesSiniestro.h"
+	"ArchivosClientes.h"
+	"ArchivosVehiculos.h"
+	"ArchivosSiniestro.h"
+	"ArchivosCompania.h"
+	"ArchivosPoliza.h"
+	"Fecha.h"
+
+1751325034 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\menu.h
+
+1750713277 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionesclientes.h
+
+1751325034 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\main.cpp
+	<iostream>
+	<cstdlib>
+	<limits>
+	"Menu.h"
 
 1750978635 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionessiniestro.h
 
@@ -170,10 +164,10 @@
 	<fstream>
 	<limits>
 
-1750984321 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.h
+1751325459 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.h
 	<string>
 
-1750983890 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.cpp
+1751324220 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.cpp
 	"siniestro.h"
 	<iostream>
 	<cstring>
@@ -304,4 +298,87 @@
 	<fstream>
 	<cstring>
 	<limits>
+
+1751285445 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosclientes.cpp
+	"ArchivosClientes.h"
+	"Cliente.h"
+	<iostream>
+	<cstring>
+	<limits>
+
+1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosclientes.h
+	"Cliente.h"
+	<string.h>
+
+1751325406 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\fecha.h
+	<string>
+
+1751324220 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivoscompania.cpp
+	"ArchivosCompania.h"
+	"Compania.h"
+	<iostream>
+	<cstring>
+
+1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivoscompania.h
+	"Compania.h"
+	<string.h>
+
+1751325499 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\compania.h
+
+1751324220 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivospoliza.cpp
+	"ArchivosPoliza.h"
+	"Poliza.h"
+	"ArchivosSiniestro.h"
+	<iostream>
+	<cstring>
+	<ctime>
+	<limits>
+
+1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivospoliza.h
+	"Poliza.h"
+	<string.h>
+
+1751325473 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.h
+	<cstring>
+	"Fecha.h"
+
+1751239104 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivossiniestro.h
+	"siniestro.h"
+	<string.h>
+
+1751285445 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivossiniestro.cpp
+	"ArchivosSiniestro.h"
+	"siniestro.h"
+	<iostream>
+	<cstring>
+	<limits>
+
+1751285445 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosvehiculos.cpp
+	"ArchivosVehiculos.h"
+	"Vehiculo.h"
+	<iostream>
+	<cstring>
+	<limits>
+
+1751239104 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosvehiculos.h
+	"Vehiculo.h"
+	<string.h>
+
+1751325527 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\compania.cpp
+	"Compania.h"
+	<cstring>
+	<iostream>
+	<limits>
+
+1751325406 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\fecha.cpp
+	<iostream>
+	<string>
+	<limits>
+	"Fecha.h"
+
+1751324220 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.cpp
+	"Poliza.h"
+	<iostream>
+	<limits>
+	<cstring>
 

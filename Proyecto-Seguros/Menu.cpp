@@ -32,7 +32,7 @@ void mostrarDinero(float cantidad) {
 void menuClientes() {
     ArchivoCliente archivoCli;
     int opcion;
-    
+
     system("cls");
     cout << "Clientes\n";
     cout << "-----------------------------\n";
@@ -72,7 +72,7 @@ void menuClientes() {
             system("pause");
             break;
     }
-    
+
     if (opcion >= 1 && opcion <= 4) {
         system("pause");
     }
@@ -81,7 +81,7 @@ void menuClientes() {
 void menuPolizas() {
     ArchivoPoliza archivoPol;
     int opcion;
-    
+
     system("cls");
     cout << "Polizas\n";
     cout << "-----------------------------\n";
@@ -121,16 +121,12 @@ void menuPolizas() {
             system("pause");
             break;
     }
-    
-    if (opcion >= 1 && opcion <= 4) {
-        system("pause");
-    }
 }
 
 void menuSiniestros() {
     ArchivoSiniestro archivoSin;
     int opcion;
-    
+
     system("cls");
     cout << "Siniestros\n";
     cout << "-----------------------------\n";
@@ -170,7 +166,7 @@ void menuSiniestros() {
             system("pause");
             break;
     }
-    
+
     if (opcion >= 1 && opcion <= 4) {
         system("pause");
     }
@@ -179,7 +175,7 @@ void menuSiniestros() {
 void menuVehiculos() {
     ArchivoVehiculo archivoVeh;
     int opcion;
-    
+
     system("cls");
     cout << "Vehiculos\n";
     cout << "-----------------------------\n";
@@ -219,7 +215,7 @@ void menuVehiculos() {
             system("pause");
             break;
     }
-    
+
     if (opcion >= 1 && opcion <= 4) {
         system("pause");
     }
@@ -228,7 +224,7 @@ void menuVehiculos() {
 void menuCompanias() {
     ArchivoCompania archivoCom;
     int opcion;
-    
+
     system("cls");
     cout << "Companias\n";
     cout << "-----------------------------\n";
@@ -268,7 +264,7 @@ void menuCompanias() {
             system("pause");
             break;
     }
-    
+
     if (opcion >= 1 && opcion <= 4) {
         system("pause");
     }
@@ -278,13 +274,12 @@ void menuVencimientos() {
     ArchivoPoliza archivoPol;
 
     archivoPol.listarProximosVencimientos(30);
-    system("pause");
 }
 
 void menuInformes() {
     ArchivoPoliza archivoPol;
     int opcion;
-    
+
     system("cls");
     cout << "-----------------------------------------\n";
     cout << "             Informes\n";
@@ -401,9 +396,5 @@ void menuInformes() {
             cout << "Opcion invalida.\n";
             system("pause");
             break;
-    }
-    
-    if (opcion >= 1 && opcion <= 5) {
-        system("pause");
     }
 }

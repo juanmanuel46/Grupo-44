@@ -19,40 +19,40 @@ Cliente::Cliente() {
 
 // Getters
 
-int Cliente::getIdCliente() const {
+int Cliente::getIdCliente()  {
     return idCliente;
 }
 
-const char* Cliente::getNombre() const {
+const char* Cliente::getNombre()  {
     return nombre;
 }
 
-const char* Cliente::getApellido() const {
+const char* Cliente::getApellido()  {
     return apellido;
 }
 
-int Cliente::getDni() const {
+int Cliente::getDni()  {
     return dni;
 }
 
 // Devuelve el objeto Fecha
-Fecha Cliente::getFechaNacimiento() const {
+Fecha Cliente::getFechaNacimiento()  {
     return fechaNacimiento;
 }
 
-bool Cliente::getActivo() const {
+bool Cliente::getActivo()  {
     return activo;
 }
 
-const char* Cliente::getDomicilio() const {
+const char* Cliente::getDomicilio()  {
     return domicilio;
 }
 
-const char* Cliente::getEmail() const {
+const char* Cliente::getEmail()  {
     return email;
 }
 
-const char* Cliente::getTelefono() const {
+const char* Cliente::getTelefono()  {
     return telefono;
 }
 
@@ -102,7 +102,7 @@ void Cliente::setTelefono(const char* valor) {
 
 // M�todos funcionales
 
-void Cliente::mostrar() const {
+void Cliente::mostrar()  {
     cout << "ID Cliente: " << idCliente << endl;
     cout << "Nombre: " << nombre << endl;
     cout << "Apellido: " << apellido << endl;

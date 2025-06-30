@@ -13,23 +13,23 @@ Siniestro::Siniestro() {
     activo = true;
 }
 
-int Siniestro::getIdSiniestro() const {
+int Siniestro::getIdSiniestro()  {
     return idSiniestro;
 }
 
-const char* Siniestro::getDescSiniestro() const {
+const char* Siniestro::getDescSiniestro()  {
     return desc_siniestro;
 }
 
-float Siniestro::getMontoReclamo() const {
+float Siniestro::getMontoReclamo()  {
     return monto_reclamo;
 }
 
-int Siniestro::getIDPoliza() const {
+int Siniestro::getIDPoliza()  {
     return id_poliza;
 }
 
-bool Siniestro::getActivo() const {
+bool Siniestro::getActivo()  {
     return activo;
 }
 
@@ -54,7 +54,7 @@ void Siniestro::setActivo(bool estado) {
     activo = estado;
 }
 
-void Siniestro::mostrar() const {
+void Siniestro::mostrar()  {
     cout << "ID Siniestro: " << idSiniestro << endl;
     cout << "Descripcion: " << desc_siniestro << endl;
     cout << "Monto a Reclamar: " << monto_reclamo << endl;

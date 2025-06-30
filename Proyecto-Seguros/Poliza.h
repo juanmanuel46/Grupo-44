@@ -25,16 +25,16 @@ public:
 
     Poliza();
     // Getters (const para seguridad)
-    int getNumeroPoliza() const;
-    int getDni() const;
-    const char* getPatente() const;
-    const Fecha& getFechaInicio() const;
-    const Fecha& getFechaVencimiento() const;
-    const char* getNombre() const;
-    const char* getApellido() const;
-    const char* getDetalleCobertura() const;
-    float getImporteMensual() const;
-    bool isActivo() const;
+    int getNumeroPoliza() ;
+    int getDni() ;
+    const char* getPatente() ;
+    const Fecha& getFechaInicio() ;
+    const Fecha& getFechaVencimiento() ;
+    const char* getNombre() ;
+    const char* getApellido() ;
+    const char* getDetalleCobertura() ;
+    float getImporteMensual() ;
+    bool isActivo() ;
 
     // Setters
     void setNumeroPoliza(int numeroPoliza);
@@ -53,7 +53,7 @@ public:
     void cargar();
     void cargarId();
     void cargarDatos();
-    void mostrar() const;
+    void mostrar() ;
 
 };
 

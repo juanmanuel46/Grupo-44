@@ -16,13 +16,13 @@ public:
     void cargar();
     void cargarId();
     void cargarDatos();
-    void mostrar() const;
+    void mostrar() ;
 
-    int getIdSiniestro() const;
-    const char* getDescSiniestro() const;
-    float getMontoReclamo() const;
-    int getIDPoliza() const;
-    bool getActivo() const;
+    int getIdSiniestro() ;
+    const char* getDescSiniestro() ;
+    float getMontoReclamo() ;
+    int getIDPoliza() ;
+    bool getActivo() ;
 
     void setIdSiniestro(int valor);
     void setDescSiniestro(const char* texto);
