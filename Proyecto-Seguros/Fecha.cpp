@@ -41,7 +41,6 @@ void Fecha::setAnio(int anio){
     _anio = anio;
 }
 
-std::string Fecha::toString(){
     return std::to_string(_dia) + "/" + std::to_string(_mes) + "/" + std::to_string(_anio);
 }
 
@@ -55,6 +54,5 @@ void Fecha::cargar()  {
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-void Fecha::mostrar(){
     cout << toString() << endl;
 }

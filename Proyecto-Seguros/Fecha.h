@@ -17,10 +17,8 @@ class Fecha{
         void setDia(int dia);
         void setMes(int mes);
         void setAnio(int anio);
-        std::string toString();
 
         void cargar();
-        void mostrar();
 };
 
 #endif // FECHA_H

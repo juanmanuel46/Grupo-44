@@ -24,16 +24,6 @@ private:
 public:
 
     Poliza();
-    int getNumeroPoliza();
-    int getDni();
-    const char* getPatente();
-    const Fecha& getFechaInicio();
-    const Fecha& getFechaVencimiento();
-    const char* getNombre();
-    const char* getApellido();
-    const char* getDetalleCobertura();
-    float getImporteMensual();
-    bool isActivo();
 
     // Setters
     void setNumeroPoliza(int numeroPoliza);
@@ -52,7 +42,6 @@ public:
     void cargar();
     void cargarId();
     void cargarDatos();
-    void mostrar();
 
 };
 

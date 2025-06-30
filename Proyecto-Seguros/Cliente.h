@@ -19,15 +19,6 @@ public:
     Cliente();
 
     // Getters
-    int getIdCliente();
-    const char* getNombre();
-    const char* getApellido();
-    int getDni();
-    Fecha getFechaNacimiento();
-    bool getActivo();
-    const char* getDomicilio();
-    const char* getEmail();
-    const char* getTelefono();
 
     // Setters
     void setIdCliente(int valor);
@@ -41,7 +32,6 @@ public:
     void setTelefono(const char* valor);
 
     // Funciones
-    void mostrar();
     void cargar();
     void cargarId();
     void cargarDatos();
