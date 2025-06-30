@@ -98,8 +98,8 @@ void Poliza::cargarDatos(){
     cout << "Ingrese fecha de inicio:" << endl;
     _fechaInicio.cargar();  // Debes tener un m�todo cargar() en la clase Fecha
 
-    cout << "Ingrese Fecha de vencimiento: ";
-    _fechaVencimiento.mostrar();
+    cout << "Ingrese fecha de vencimiento:" << endl;
+    _fechaVencimiento.cargar();
 
     cout << "Ingrese nombre del titular: ";
     cin.getline(_nombre, 10);
