@@ -109,8 +109,8 @@ void Poliza::cargarDatos(){
     cin >> _importeMensual;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout << "¿La poliza esta activa? (1 para si, 0 para no): ";
-    cin >> _activo;
+    cout <<"¿La poliza esta activa? (1 para si, 0 para no): ";
+    cin >>_activo;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 

@@ -14,7 +14,7 @@ int ArchivoPoliza::buscarPoliza(int numeroPoliza) {
     pPoliza = fopen(nombre, "rb");
 
     if (pPoliza == nullptr) {
-        return -2; 
+        return -2;
     }
 
     int pos = 0;
@@ -27,7 +27,7 @@ int ArchivoPoliza::buscarPoliza(int numeroPoliza) {
     }
 
     fclose(pPoliza);
-    return -1; 
+    return -1;
 }
 
 int ArchivoPoliza::agregarRegistro() {
@@ -40,16 +40,16 @@ int ArchivoPoliza::agregarRegistro() {
     if (resultado >= 0) {
         cout << "Error: ya existe una poliza con el numero " << nuevaPoliza.getNumeroPoliza() << "." << endl;
         system("pause");
-        return -2; 
+        return -2;
     }
-    
-    nuevaPoliza.cargarDatos(); 
+
+    nuevaPoliza.cargarDatos();
 
     FILE *pPoliza;
     pPoliza = fopen(nombre, "ab");
     if (pPoliza == nullptr) {
         cout << "No se pudo abrir el archivo para escribir." << endl;
-        return -1; 
+        return -1;
     }
 
     int escribio = fwrite(&nuevaPoliza, tamanioRegistro, 1, pPoliza);
@@ -73,7 +73,7 @@ bool ArchivoPoliza::listarRegistros() {
         system("pause");
         return false;
     }
-    
+
     bool hayPolizasActivas = false;
     system("cls");
     cout << "LISTADO DE POLIZAS" << endl;
@@ -91,7 +91,7 @@ bool ArchivoPoliza::listarRegistros() {
     if (!hayPolizasActivas) {
         cout << "No hay polizas cargadas para mostrar." << endl;
     }
-    
+
     system("pause");
     return true;
 }
@@ -100,9 +100,9 @@ Poliza ArchivoPoliza::leerRegistro(int pos) {
     Poliza obj;
     FILE *pPoliza;
     pPoliza = fopen(nombre, "rb");
-    
+
     // Inicialización por si falla la apertura o lectura
-    obj.setNumeroPoliza(-1); 
+    obj.setNumeroPoliza(-1);
 
     if (pPoliza == nullptr) {
         return obj;
@@ -180,9 +180,9 @@ bool ArchivoPoliza::bajaLogica(int numeroPoliza) {
         system("pause");
         return false;
     }
-    
+
     Poliza reg = leerRegistro(pos);
-    
+
     if(!reg.isActivo()){
         cout << "La poliza con numero " << numeroPoliza << " ya se encuentra dada de baja." << endl;
         system("pause");
@@ -206,7 +206,7 @@ bool ArchivoPoliza::bajaLogica(int numeroPoliza) {
     } else {
         cout << "Operacion cancelada." << endl;
     }
-    
+
     system("pause");
     return true;
 }
@@ -217,11 +217,11 @@ int ArchivoPoliza::contarRegistros() {
     if (pPoliza == nullptr) {
         return -1;
     }
-    
+
     fseek(pPoliza, 0, SEEK_END);
     int cantBytes = ftell(pPoliza);
     fclose(pPoliza);
-    
+
     return cantBytes / tamanioRegistro;
 }
 
@@ -236,14 +236,14 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
         system("pause");
         return false;
     }
-    
+
     // Obtener fecha actual
     time_t ahora = time(0);
     tm* fechaActual = localtime(&ahora);
     int diaActual = fechaActual->tm_mday;
     int mesActual = fechaActual->tm_mon + 1; // tm_mon va de 0 a 11
     int anioActual = fechaActual->tm_year + 1900; // tm_year es años desde 1900
-    
+
     bool hayVencimientos = false;
     system("cls");
     cout << "========================================" << endl;
@@ -258,26 +258,26 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
     while (fread(&obj, tamanioRegistro, 1, pPoliza) == 1) {
         if (obj.isActivo()) {
             Fecha fechaVenc = obj.getFechaVencimiento();
-            
+
             // Calcular días hasta vencimiento
             // Convertir fechas a días juliano aproximado para comparar
             int diasVencimiento = fechaVenc.getDia() + fechaVenc.getMes() * 30 + fechaVenc.getAnio() * 365;
             int diasActuales = diaActual + mesActual * 30 + anioActual * 365;
             int diferenciaDias = diasVencimiento - diasActuales;
-            
+
             // Si vence dentro del rango especificado (incluyendo ya vencidas)
             if (diferenciaDias <= diasAnticipacion && diferenciaDias >= -30) {
                 if (!hayVencimientos) {
                     cout << "Poliza - Cliente - Patente - Vencimiento - Estado" << endl;
                     cout << "----------------------------------------" << endl;
                 }
-                
-                cout << "Poliza: " << obj.getNumeroPoliza() 
-                      << " | Cliente: " << obj.getNombre() << " " << obj.getApellido()
-                     << " | Patente: " << obj.getPatente() 
+
+                cout << "Poliza: " << obj.getNumeroPoliza()
+                     << " | Cliente: " << obj.getNombre() << " " << obj.getApellido()
+                     << " | Patente: " << obj.getPatente()
                      << " | Vencimiento: " << fechaVenc.toString()
                      << " | Estado: ";
-                
+
                 if (diferenciaDias < 0) {
                     cout << "VENCIDA";
                 } else if (diferenciaDias <= 7) {
@@ -286,7 +286,7 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
                     cout << "PROXIMO";
                 }
                 cout << endl;
-                
+
                 hayVencimientos = true;
             }
         }
@@ -297,33 +297,33 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
     if (!hayVencimientos) {
         cout << "No hay polizas proximas a vencer en los proximos " << diasAnticipacion << " dias." << endl;
     }
-    
+
     cout << "========================================" << endl;
     cout << "0 - Volver al menu principal" << endl;
-    
+
     system("pause");
     return true;
 }
 
-    
+
 
 bool ArchivoPoliza::listarPolizasConSiniestros() {
     system("cls");
     cout << "========================================" << endl;
     cout << "    POLIZAS CON SINIESTROS" << endl;
     cout << "========================================" << endl;
-    
-    
+
+
     ArchivoSiniestro archivoSin;
     bool hayResultados = false;
-    
+
     FILE *pPoliza = fopen(nombre, "rb");
     if (pPoliza == nullptr) {
         cout << "No se pudo abrir el archivo de polizas." << endl;
         system("pause");
         return false;
     }
-    
+
     cout << "POLIZAS DISPONIBLES:" << endl;
     Poliza pol;
     while (fread(&pol, tamanioRegistro, 1, pPoliza) == 1) {
@@ -331,33 +331,33 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
             cout << "Poliza ID: " << pol.getNumeroPoliza() << " - Cliente: " << pol.getNombre() << " " << pol.getApellido() << endl;
         }
     }
-    
+
     cout << "\nSINIESTROS DISPONIBLES:" << endl;
     FILE *pSiniestro = fopen("siniestros.dat", "rb");
     if (pSiniestro != nullptr) {
         Siniestro sin;
         while (fread(&sin, sizeof(Siniestro), 1, pSiniestro) == 1) {
             if (sin.getActivo()) {
-                cout << "Siniestro ID: " << sin.getIdSiniestro() << " - ID Poliza: " << sin.getIDPoliza() 
+                cout << "Siniestro ID: " << sin.getIdSiniestro() << " - ID Poliza: " << sin.getIDPoliza()
                      << " - Monto: " << sin.getMontoReclamo() << endl;
             }
         }
         fclose(pSiniestro);
     }
-    
+
     cout << "\nBUSCANDO COINCIDENCIAS:" << endl;
     cout << "----------------------------------------" << endl;
-    
+
     // Volver al inicio del archivo de pólizas
     fseek(pPoliza, 0, SEEK_SET);
-    
+
     while (fread(&pol, tamanioRegistro, 1, pPoliza) == 1) {
         if (pol.isActivo()) {
             // Buscar si esta póliza tiene siniestros
             bool tieneSiniestros = false;
             int cantSiniestros = 0;
             float montoTotal = 0;
-            
+
             FILE *pSin = fopen("siniestros.dat", "rb");
             if (pSin != nullptr) {
                 Siniestro sin;
@@ -366,13 +366,13 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
                         tieneSiniestros = true;
                         cantSiniestros++;
                         montoTotal += sin.getMontoReclamo();
-                        cout << "COINCIDENCIA ENCONTRADA: Poliza " << pol.getNumeroPoliza() 
+                        cout << "COINCIDENCIA ENCONTRADA: Poliza " << pol.getNumeroPoliza()
                              << " con Siniestro ID " << sin.getIdSiniestro() << endl;
                     }
                 }
                 fclose(pSin);
             }
-            
+
             if (tieneSiniestros) {
                 if (!hayResultados) {
                     cout << "\nRESULTADOS FINALES:" << endl;
@@ -380,22 +380,22 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
                     cout << "--------------------------------------------------------" << endl;
                     hayResultados = true;
                 }
-                cout << pol.getNumeroPoliza() << " | " 
+                cout << pol.getNumeroPoliza() << " | "
                      << pol.getNombre() << " " << pol.getApellido() << " | "
-                     << pol.getPatente() << " | " 
-                     << cantSiniestros << " | $" 
+                     << pol.getPatente() << " | "
+                     << cantSiniestros << " | $"
                      << (long long)montoTotal << endl;
             }
         }
     }
-    
+
     fclose(pPoliza);
-    
+
     if (!hayResultados) {
         cout << "No hay polizas con siniestros registrados." << endl;
         cout << "Esto significa que ninguna poliza tiene siniestros con IDs coincidentes." << endl;
     }
-    
+
     cout << "========================================" << endl;
     system("pause");
     return true;
@@ -406,22 +406,22 @@ float ArchivoPoliza::calcularRecaudacionAnual(int anio) {
     if (pPoliza == nullptr) {
         return 0;
     }
-    
+
     float recaudacion = 0;
     Poliza pol;
-    
+
     while (fread(&pol, tamanioRegistro, 1, pPoliza) == 1) {
         if (pol.isActivo()) {
             Fecha fechaInicio = pol.getFechaInicio();
             Fecha fechaVenc = pol.getFechaVencimiento();
-            
+
             // Solo contar si la póliza estuvo activa durante ese año
             if (fechaInicio.getAnio() <= anio && fechaVenc.getAnio() >= anio) {
                 recaudacion += pol.getImporteMensual() * 12;
             }
         }
     }
-    
+
     fclose(pPoliza);
     return recaudacion;
 }
@@ -431,27 +431,27 @@ float ArchivoPoliza::calcularRecaudacionMensual(int mes, int anio) {
     if (pPoliza == nullptr) {
         return 0;
     }
-    
+
     float recaudacion = 0;
     Poliza pol;
-    
+
     while (fread(&pol, tamanioRegistro, 1, pPoliza) == 1) {
         if (pol.isActivo()) {
             Fecha fechaInicio = pol.getFechaInicio();
             Fecha fechaVenc = pol.getFechaVencimiento();
-            
+
             // Verificar si la póliza estaba vigente en el mes/año consultado
-            bool inicioAntes = (fechaInicio.getAnio() < anio) || 
+            bool inicioAntes = (fechaInicio.getAnio() < anio) ||
                               (fechaInicio.getAnio() == anio && fechaInicio.getMes() <= mes);
-            bool venceDepues = (fechaVenc.getAnio() > anio) || 
+            bool venceDepues = (fechaVenc.getAnio() > anio) ||
                               (fechaVenc.getAnio() == anio && fechaVenc.getMes() >= mes);
-            
+
             if (inicioAntes && venceDepues) {
                 recaudacion += pol.getImporteMensual();
             }
         }
     }
-    
+
     fclose(pPoliza);
     return recaudacion;
 }
@@ -460,32 +460,32 @@ float ArchivoPoliza::calcularRecaudacionSemanal(int semana, int anio) {
     // Implementación simple: calcular mes aproximado de la semana
     int mes = (semana - 1) / 4 + 1; // semanas 1-4=mes1, 5-8=mes2, etc.
     if (mes > 12) mes = 12;
-    
+
     FILE *pPoliza = fopen(nombre, "rb");
     if (pPoliza == nullptr) {
         return 0;
     }
-    
+
     float recaudacion = 0;
     Poliza pol;
-    
+
     while (fread(&pol, tamanioRegistro, 1, pPoliza) == 1) {
         if (pol.isActivo()) {
             Fecha fechaInicio = pol.getFechaInicio();
             Fecha fechaVenc = pol.getFechaVencimiento();
-            
+
             // Solo contar si la póliza estaba vigente en ese mes/año aproximado
-            bool inicioAntes = (fechaInicio.getAnio() < anio) || 
+            bool inicioAntes = (fechaInicio.getAnio() < anio) ||
                               (fechaInicio.getAnio() == anio && fechaInicio.getMes() <= mes);
-            bool venceDepues = (fechaVenc.getAnio() > anio) || 
+            bool venceDepues = (fechaVenc.getAnio() > anio) ||
                               (fechaVenc.getAnio() == anio && fechaVenc.getMes() >= mes);
-            
+
             if (inicioAntes && venceDepues) {
                 recaudacion += pol.getImporteMensual() / 4; // Dividir por semanas del mes
             }
         }
     }
-    
+
     fclose(pPoliza);
     return recaudacion;
 }
@@ -495,31 +495,31 @@ float ArchivoPoliza::calcularRecaudacionPersonalizada(Fecha fechaInicio, Fecha f
     if (pPoliza == nullptr) {
         return 0;
     }
-    
+
     float recaudacion = 0;
     Poliza pol;
-    
+
     // Cálculo simple de meses entre fechas
-    int mesesPeriodo = (fechaFin.getAnio() - fechaInicio.getAnio()) * 12 + 
+    int mesesPeriodo = (fechaFin.getAnio() - fechaInicio.getAnio()) * 12 +
                        (fechaFin.getMes() - fechaInicio.getMes()) + 1;
-    
+
     while (fread(&pol, tamanioRegistro, 1, pPoliza) == 1) {
         if (pol.isActivo()) {
             Fecha fechaInicPol = pol.getFechaInicio();
             Fecha fechaVencPol = pol.getFechaVencimiento();
-            
+
             // Verificar si la póliza estuvo vigente durante el período consultado
-            bool polizaIniciaAntes = (fechaInicPol.getAnio() < fechaFin.getAnio()) || 
+            bool polizaIniciaAntes = (fechaInicPol.getAnio() < fechaFin.getAnio()) ||
                                     (fechaInicPol.getAnio() == fechaFin.getAnio() && fechaInicPol.getMes() <= fechaFin.getMes());
-            bool polizaVenceDepues = (fechaVencPol.getAnio() > fechaInicio.getAnio()) || 
+            bool polizaVenceDepues = (fechaVencPol.getAnio() > fechaInicio.getAnio()) ||
                                     (fechaVencPol.getAnio() == fechaInicio.getAnio() && fechaVencPol.getMes() >= fechaInicio.getMes());
-            
+
             if (polizaIniciaAntes && polizaVenceDepues) {
                 recaudacion += pol.getImporteMensual() * mesesPeriodo;
             }
         }
     }
-    
+
     fclose(pPoliza);
     return recaudacion;
-} 
+}

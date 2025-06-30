@@ -32,14 +32,31 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="ArchivosClientes.cpp" />
+		<Unit filename="ArchivosClientes.h" />
+		<Unit filename="ArchivosCompania.cpp" />
+		<Unit filename="ArchivosCompania.h" />
+		<Unit filename="ArchivosPoliza.cpp" />
+		<Unit filename="ArchivosPoliza.h" />
+		<Unit filename="ArchivosSiniestro.cpp" />
+		<Unit filename="ArchivosSiniestro.h" />
+		<Unit filename="ArchivosVehiculos.cpp" />
+		<Unit filename="ArchivosVehiculos.h" />
 		<Unit filename="Cliente.cpp" />
+		<Unit filename="Cliente.h" />
+		<Unit filename="Compania.cpp" />
+		<Unit filename="Compania.h" />
+		<Unit filename="Fecha.cpp" />
+		<Unit filename="Fecha.h" />
 		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.h" />
 		<Unit filename="Poliza.cpp" />
 		<Unit filename="Poliza.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="siniestro.cpp" />
 		<Unit filename="siniestro.h" />
 		<Unit filename="vehiculo.cpp" />
+		<Unit filename="vehiculo.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
