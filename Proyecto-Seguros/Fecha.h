@@ -19,5 +19,5 @@ class Fecha{
     std::string toString();
 
     void cargar();
-    void mostrar();
+    void mostrar() const;
 };

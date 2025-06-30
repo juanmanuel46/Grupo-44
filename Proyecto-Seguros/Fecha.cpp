@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Fecha.h"
 
 Fecha::Fecha(){
@@ -40,15 +41,15 @@ std::string Fecha::toString(){
     return std::to_string(_dia) + "/" + std::to_string(_mes) + "/" + std::to_string(_anio);
 }
 
-void Fecha::cargar(){
-    cout << "Ingrese el dia: ";
-    cin >> _dia;
-    cout << "Ingrese el mes: ";
-    cin >> _mes;
-    cout << "Ingrese el anio: ";
-    cin >> _anio;
+void Fecha::cargar()  {
+    std::cout << "Ingrese el dia: ";
+    std::cin >> _dia;
+    std::cout << "Ingrese el mes: ";
+    std::cin >> _mes;
+    std::cout << "Ingrese el anio: ";
+    std::cin >> _anio;
 }
 
-void Fecha::mostrar(){
-    cout << toString() << endl;
+void Fecha::mostrar() const {
+    std::cout << toString() << std::endl;
 }
