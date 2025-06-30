@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <limits>
 #include "Fecha.h"
 
 using namespace std;
@@ -51,6 +52,7 @@ void Fecha::cargar()  {
     cin >> _mes;
     cout << "Ingrese el anio: ";
     cin >> _anio;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 void Fecha::mostrar() const {

@@ -1,4 +1,5 @@
 #include "Cliente.h"
+#include "Fecha.h"
 #include <iostream>
 #include <cstring>
 #include <limits>
@@ -10,7 +11,6 @@ Cliente::Cliente() {
     strcpy(nombre, "");
     strcpy(apellido, "");
     dni = 0;
-    fechaNacimiento = 0;
     strcpy(domicilio, "");
     strcpy(email, "");
     strcpy(telefono, "");
@@ -35,7 +35,8 @@ int Cliente::getDni() const {
     return dni;
 }
 
-int Cliente::getFechaNacimiento() const {
+// Devuelve el objeto Fecha
+Fecha Cliente::getFechaNacimiento() const {
     return fechaNacimiento;
 }
 
@@ -75,7 +76,8 @@ void Cliente::setDni(int valor) {
     dni = valor;
 }
 
-void Cliente::setFechaNacimiento(int valor) {
+// Asigna un objeto Fecha
+void Cliente::setFechaNacimiento(const Fecha& valor) {
     fechaNacimiento = valor;
 }
 
@@ -98,14 +100,14 @@ void Cliente::setTelefono(const char* valor) {
     telefono[sizeof(telefono) - 1] = '\0';
 }
 
-// Métodos funcionales
+// Mï¿½todos funcionales
 
 void Cliente::mostrar() const {
     cout << "ID Cliente: " << idCliente << endl;
     cout << "Nombre: " << nombre << endl;
     cout << "Apellido: " << apellido << endl;
     cout << "DNI: " << dni << endl;
-    cout << "Fecha de nacimiento: " << fechaNacimiento << endl;
+    cout << "Fecha de nacimiento: " << fechaNacimiento.toString() << endl;
     cout << "Domicilio: " << domicilio << endl;
     cout << "Email: " << email << endl;
     cout << "Telefono: " << telefono << endl;
@@ -129,9 +131,8 @@ void Cliente::cargarDatos() {
     cin >> dni;
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    cout << "Fecha de nacimiento (AAAAMMDD): ";
-    cin >> fechaNacimiento;
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << "Fecha de nacimiento: " << endl;
+    fechaNacimiento.cargar();
 
     cout << "Domicilio: ";
     cin.getline(domicilio, sizeof(domicilio));
