@@ -5,5 +5,3 @@
 
 using namespace std;
 
-// Todo tu c�digo de los men�s ac�
-//...

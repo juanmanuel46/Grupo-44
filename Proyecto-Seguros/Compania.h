@@ -10,12 +10,12 @@ private:
 
 public:
     Compania();
-    
+
     // Getters
-    const char* getNombre() const;
-    int getId() const;
-    float getComision() const;
-    bool getActivo() const;
+    const char* getNombre();
+    int getId();
+    float getComision();
+    bool getActivo();
 
     // Setters
     void setNombre(const char* nombre);
@@ -24,7 +24,7 @@ public:
     void setActivo(bool valor);
 
     // Funciones
-    void mostrar() const;
+    void mostrar();
     void cargar();
     void cargarId();
     void cargarDatos();

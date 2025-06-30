@@ -365,10 +365,7 @@ void menuCompanias() {
 
 void menuVencimientos() {
     ArchivoPoliza archivoPol;
-
     archivoPol.listarProximosVencimientos(30);
-
-
 }
 
 void menuInformes() {

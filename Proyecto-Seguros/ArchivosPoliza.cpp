@@ -267,27 +267,23 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
 
             // Si vence dentro del rango especificado (incluyendo ya vencidas)
             if (diferenciaDias <= diasAnticipacion && diferenciaDias >= -30) {
-                if (!hayVencimientos) {
-                    cout << "Poliza - Cliente - Patente - Vencimiento - Estado" << endl;
-                    cout << "----------------------------------------" << endl;
-                }
+            cout << "Poliza: " << obj.getNumeroPoliza()
+             << " | Cliente: " << obj.getNombre() << " " << obj.getApellido()
+             << " | Patente: " << obj.getPatente()
+             << " | Vencimiento: " << fechaVenc.toString()
+             << " | Estado: ";
 
-                cout << "Poliza: " << obj.getNumeroPoliza()
-                     << " | Cliente: " << obj.getNombre() << " " << obj.getApellido()
-                     << " | Patente: " << obj.getPatente()
-                     << " | Vencimiento: " << fechaVenc.toString()
-                     << " | Estado: ";
+            if (diferenciaDias < 0) {
+                cout << "VENCIDA";
+            } else if (diferenciaDias <= 7) {
+                cout << "URGENTE";
+            } else {
+                cout << "PROXIMO";
+            }
+            cout << endl;
 
-                if (diferenciaDias < 0) {
-                    cout << "VENCIDA";
-                } else if (diferenciaDias <= 7) {
-                    cout << "URGENTE";
-                } else {
-                    cout << "PROXIMO";
-                }
-                cout << endl;
+            hayVencimientos = true;
 
-                hayVencimientos = true;
             }
         }
     }

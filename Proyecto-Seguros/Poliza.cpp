@@ -19,16 +19,16 @@ Poliza::Poliza() {
 }
 
 // Getters corregidos
-int Poliza::getNumeroPoliza() const { return _numeroPoliza; }
-int Poliza::getDni() const { return _dni; }
-const char* Poliza::getPatente() const { return _patente; }
-const Fecha& Poliza::getFechaInicio() const { return _fechaInicio; }
-const Fecha& Poliza::getFechaVencimiento() const { return _fechaVencimiento; }
-const char* Poliza::getNombre() const { return _nombre; }
-const char* Poliza::getApellido() const { return _apellido; }  // A�adido (faltaba en .h)
-const char* Poliza::getDetalleCobertura() const { return _detalleCobertura; }
-float Poliza::getImporteMensual() const { return _importeMensual; }
-bool Poliza::isActivo() const { return _activo; }  // Corregido: _activo
+int Poliza::getNumeroPoliza(){ return _numeroPoliza; }
+int Poliza::getDni() { return _dni; }
+const char* Poliza::getPatente(){ return _patente; }
+const Fecha& Poliza::getFechaInicio() { return _fechaInicio; }
+const Fecha& Poliza::getFechaVencimiento() { return _fechaVencimiento; }
+const char* Poliza::getNombre() { return _nombre; }
+const char* Poliza::getApellido(){ return _apellido; }  // A�adido (faltaba en .h)
+const char* Poliza::getDetalleCobertura() { return _detalleCobertura; }
+float Poliza::getImporteMensual()  { return _importeMensual; }
+bool Poliza::isActivo() { return _activo; }  // Corregido: _activo
 
 // Setters corregidos
 void Poliza::setNumeroPoliza(int numeroPoliza) { _numeroPoliza = numeroPoliza; }
@@ -58,7 +58,7 @@ void Poliza::setActivo(bool estado) { _activo = estado; }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-void Poliza::mostrar() const {
+void Poliza::mostrar(){
     cout << "Nro de poliza: " << _numeroPoliza << endl;
     cout << "DNI: " << _dni << endl;
     cout << "Patente: " << _patente << endl;
