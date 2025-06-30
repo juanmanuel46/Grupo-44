@@ -63,9 +63,11 @@ void Poliza::mostrar() const {
     cout << "DNI: " << _dni << endl;
     cout << "Patente: " << _patente << endl;
     cout << "Fecha de inicio: ";
-    _fechaInicio.mostrar();  
+    _fechaInicio.mostrar();
+    cout << endl;
     cout << "Fecha de vencimiento: ";
-   _fechaVencimiento.mostrar(); 
+    _fechaVencimiento.mostrar();
+    cout << endl;
     cout << "Nombre: " << _nombre << endl;
     cout << "Apellido: " << _apellido << endl;
     cout << "Detalle de cobertura: " << _detalleCobertura << endl;
