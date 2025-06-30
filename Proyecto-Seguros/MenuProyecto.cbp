@@ -33,11 +33,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Cliente.cpp" />
-		<Unit filename="FuncionesClientes.cpp" />
-		<Unit filename="FuncionesSiniestro.cpp" />
-		<Unit filename="FuncionesSiniestro.h" />
-		<Unit filename="FuncionesVehiculos.cpp" />
-		<Unit filename="FuncionesVehiculos.h" />
 		<Unit filename="Menu.cpp" />
 		<Unit filename="Poliza.cpp" />
 		<Unit filename="Poliza.h" />

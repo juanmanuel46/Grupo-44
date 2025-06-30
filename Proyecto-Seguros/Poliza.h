@@ -16,7 +16,7 @@ private:
     Fecha _fechaVencimiento;
     char _nombre[10];
     char _apellido[10];
-    char _detalleCobertura[40];
+    char _detalleCobertura[50];
     float _importeMensual;
     bool _activo;
 

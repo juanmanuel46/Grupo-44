@@ -6,8 +6,27 @@
 #include "ArchivosClientes.h"
 #include "ArchivosVehiculos.h"
 #include "ArchivosSiniestro.h"
+#include "ArchivosCompania.h"
+#include "ArchivosPoliza.h"
 
 using namespace std;
+
+// Función auxiliar para mostrar dinero de forma legible
+void mostrarDinero(float cantidad) {
+    if (cantidad == 0) {
+        cout << "0.00";
+        return;
+    }
+
+    // Convertir a entero para evitar notación científica
+    long long pesos = (long long)cantidad;
+    int centavos = (int)((cantidad - pesos) * 100);
+
+    cout << pesos;
+    if (centavos > 0) {
+        cout << "." << centavos;
+    }
+}
 
 void menuPrincipal();
 void menuClientes();
@@ -50,9 +69,10 @@ void menuPrincipal() {
         cout << "1 - Clientes\n";
         cout << "2 - Polizas\n";
         cout << "3 - Siniestros\n";
-        cout << "4 - Vehiculos\n";
-        cout << "5 - Proximos Vencimientos\n";
-        cout << "6 - Informes\n";
+        cout << "4 - Companias\n";
+        cout << "5 - Vehiculos\n";
+        cout << "6 - Proximos Vencimientos\n";
+        cout << "7 - Informes\n";
         cout << "-----------------------------\n";
         cout << "0 - Salir\n";
         cout << "Ingrese una opcion: ";
@@ -63,9 +83,10 @@ void menuPrincipal() {
             case 1: menuClientes(); break;
             case 2: menuPolizas(); break;
             case 3: menuSiniestros(); break;
-            case 4: menuVehiculos(); break;
-            case 5: menuVencimientos(); break;
-            case 6: menuInformes(); break;
+            case 4: menuCompanias(); break;
+            case 5: menuVehiculos(); break;
+            case 6: menuVencimientos(); break;
+            case 7: menuInformes(); break;
             case 0: cout << "Saliendo del programa...\n"; break;
             default: cout << "Opcion invalida.\n"; system("pause"); break;
         }
@@ -74,7 +95,7 @@ void menuPrincipal() {
 
 void menuClientes() {
 
-    ArchivoCliente archivoCli; 
+    ArchivoCliente archivoCli;
 
     int opcion;
     bool salirSubmenu = false;
@@ -94,21 +115,21 @@ void menuClientes() {
 
          switch(opcion) {
             case 1:
-                archivoCli.listarRegistros(); 
+                archivoCli.listarRegistros();
                 break;
             case 2:
-                archivoCli.agregarRegistro(); 
+                archivoCli.agregarRegistro();
                 break;
             case 3:
-                archivoCli.modificarDatosCliente(); 
+                archivoCli.modificarDatosCliente();
                 break;
             case 4:
-                { 
+                {
                     int id;
                     cout << "Ingrese el ID del cliente a eliminar: ";
                     cin >> id;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    archivoCli.bajaLogica(id); 
+                    archivoCli.bajaLogica(id);
                 }
                 break;
             case 0:
@@ -127,6 +148,9 @@ void menuClientes() {
 }
 
 void menuPolizas() {
+
+    ArchivoPoliza archivoPol;
+
     int opcion;
     bool salirSubmenu = false;
     do {
@@ -144,10 +168,24 @@ void menuPolizas() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch(opcion) {
-            case 1: cout << "Listado de polizas...\n"; system("pause"); break;
-            case 2: cout << "Agregar poliza...\n"; system("pause"); break;
-            case 3: cout << "Modificar poliza...\n"; system("pause"); break;
-            case 4: cout << "Eliminar poliza...\n"; system("pause"); break;
+            case 1:
+                archivoPol.listarRegistros();
+                break;
+            case 2:
+                archivoPol.agregarRegistro();
+                break;
+            case 3:
+                archivoPol.modificarDatosPoliza();
+                break;
+            case 4:
+                {
+                    int numero;
+                    cout << "Ingrese el numero de poliza a eliminar: ";
+                    cin >> numero;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    archivoPol.bajaLogica(numero);
+                }
+                break;
             case 0:
                 salirSubmenu = true;
                 break;
@@ -156,7 +194,6 @@ void menuPolizas() {
                 system("pause");
                 break;
         }
-
         if (opcion >= 1 && opcion <= 4) {
             if (preguntarVolverMenuPrincipal()) {
                 salirSubmenu = true;
@@ -167,18 +204,18 @@ void menuPolizas() {
 
 void menuSiniestros() {
 
-    ArchivoSiniestro archivoSin; 
+    ArchivoSiniestro archivoSin;
 
     int opcion;
     bool salirSubmenu = false;
     do {
         system("cls");
-        cout << "Clientes\n";
+        cout << "Siniestros\n";
         cout << "-----------------------------\n";
-        cout << "1 - Listar Clientes\n";
-        cout << "2 - Agregar Cliente\n";
-        cout << "3 - Modificar Cliente\n";
-        cout << "4 - Eliminar Cliente\n";
+        cout << "1 - Listar Siniestros\n";
+        cout << "2 - Agregar Siniestro\n";
+        cout << "3 - Modificar Siniestro\n";
+        cout << "4 - Eliminar Siniestro\n";
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
@@ -187,21 +224,21 @@ void menuSiniestros() {
 
          switch(opcion) {
             case 1:
-                archivoSin.listarRegistros(); 
+                archivoSin.listarRegistros();
                 break;
             case 2:
-                archivoSin.agregarRegistro(); 
+                archivoSin.agregarRegistro();
                 break;
             case 3:
-                archivoSin.modificarDatosSiniestro(); 
+                archivoSin.modificarDatosSiniestro();
                 break;
             case 4:
-                { 
+                {
                     int id;
-                    cout << "Ingrese el ID del cliente a eliminar: ";
+                    cout << "Ingrese el ID del siniestro a eliminar: ";
                     cin >> id;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    archivoSin.bajaLogica(); 
+                    archivoSin.bajaLogica();
                 }
                 break;
             case 0:
@@ -219,20 +256,20 @@ void menuSiniestros() {
     } while (!salirSubmenu);
 }
 
-void menuSiniestros() {
+void menuVehiculos() {
 
-    ArchivoVehiculo archivoVeh; 
+    ArchivoVehiculo archivoVeh;
 
     int opcion;
     bool salirSubmenu = false;
     do {
         system("cls");
-        cout << "Clientes\n";
+        cout << "Vehiculos\n";
         cout << "-----------------------------\n";
-        cout << "1 - Listar Clientes\n";
-        cout << "2 - Agregar Cliente\n";
-        cout << "3 - Modificar Cliente\n";
-        cout << "4 - Eliminar Cliente\n";
+        cout << "1 - Listar Vehiculos\n";
+        cout << "2 - Agregar Vehiculo\n";
+        cout << "3 - Modificar Vehiculo\n";
+        cout << "4 - Eliminar Vehiculo\n";
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
@@ -241,21 +278,74 @@ void menuSiniestros() {
 
          switch(opcion) {
             case 1:
-                archivoVeh.listarRegistros(); 
+                archivoVeh.listarRegistros();
                 break;
             case 2:
-                archivoVeh.agregarRegistro(); 
+                archivoVeh.agregarRegistro();
                 break;
             case 3:
-                archivoVeh.modificarDatosVehiculo(); 
+                archivoVeh.modificarDatosVehiculo();
                 break;
             case 4:
-                { 
+                {
                     int id;
-                    cout << "Ingrese el ID del cliente a eliminar: ";
+                    cout << "Ingrese el ID del vehiculo a eliminar: ";
                     cin >> id;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    archivoVeh.bajaLogica(); 
+                    archivoVeh.bajaLogica();
+                }
+                break;
+            case 0:
+                salirSubmenu = true;
+                break;
+            default:
+                cout << "Opcion invalida.\n";
+                system("pause");
+                break;
+        }
+        if (opcion >= 1 && opcion <= 4) {
+            if (preguntarVolverMenuPrincipal()) {
+                salirSubmenu = true;}
+        }
+    } while (!salirSubmenu);
+}
+
+void menuCompanias() {
+
+    ArchivoCompania archivoCom;
+    int opcion;
+    bool salirSubmenu = false;
+    do {
+    system("cls");
+    cout << "Companias\n";
+    cout << "-----------------------------\n";
+    cout << "1 - Listar Companias\n";
+    cout << "2 - Agregar Compania\n";
+    cout << "3 - Modificar Compania\n";
+    cout << "4 - Eliminar Compania\n";
+    cout << "----------------------------\n";
+    cout << "0 - Volver al menu principal\n";
+    cout << "Ingrese una opcion: ";
+    cin >> opcion;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+         switch(opcion) {
+            case 1:
+                archivoCom.listarRegistros();
+                break;
+            case 2:
+                archivoCom.agregarRegistro();
+                break;
+            case 3:
+                archivoCom.modificarDatosCompania();
+                break;
+            case 4:
+                {
+                    int id;
+                        cout << "Ingrese el ID de la compania a eliminar: ";
+                    cin >> id;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    archivoCom.bajaLogica(id);
                 }
                 break;
             case 0:
@@ -274,39 +364,128 @@ void menuSiniestros() {
 }
 
 void menuVencimientos() {
-    system("cls");
-    cout << "Proximos Vencimientos\n";
-    cout << "-----------------------------\n";
-    cout << "Tabla con datos de poliza!\n";
-    cout << "-----------------------------\n";
-    system("pause");
-    preguntarVolverMenuPrincipal();
+    ArchivoPoliza archivoPol;
+
+    archivoPol.listarProximosVencimientos(30);
+
+
 }
 
 void menuInformes() {
+    ArchivoPoliza archivoPol;
     int opcion;
     bool salirSubmenu = false;
     do {
         system("cls");
-        cout << "Informes\n";
-        cout << "---------------------------\n";
+        cout << "-----------------------------------------\n";
+        cout << "             Informes\n";
+        cout << "-----------------------------------------\n";
         cout << "1 - Listado de polizas por siniestros\n";
-        cout << "2 - Recaudacion de ventas Anuales\n";
-        cout << "3 - Recaudacion de ventas Mensuales\n";
-        cout << "4 - Recaudacion de ventas Semanales\n";
-        cout << "5 - Recaudacion de ventas Personalizado\n";
-        cout << "----------------------------\n";
+        cout << "2 - Recaudacion de ventas anuales\n";
+        cout << "3 - Recaudacion de ventas mensuales\n";
+        cout << "4 - Recaudacion de ventas semanales\n";
+        cout << "5 - Recaudacion de ventas personalizada\n";
+        cout << "-----------------------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
         cin >> opcion;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch(opcion) {
-            case 1: cout << "Listado de polizas por siniestros...\n"; system("pause"); break;
-            case 2: cout << "Recaudacion anual...\n"; system("pause"); break;
-            case 3: cout << "Recaudacion mensual...\n"; system("pause"); break;
-            case 4: cout << "Recaudacion semanal...\n"; system("pause"); break;
-            case 5: cout << "Recaudacion personalizada...\n"; system("pause"); break;
+            case 1:
+                archivoPol.listarPolizasConSiniestros();
+                break;
+            case 2:
+                {
+                    int anio;
+                    cout << "Ingrese el anio para la recaudacion: ";
+                    cin >> anio;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                    float recaudacion = archivoPol.calcularRecaudacionAnual(anio);
+                    system("cls");
+                    cout << "-----------------------------------------" << endl;
+                    cout << "    RECAUDACION ANUAL " << anio << endl;
+                    cout << "-----------------------------------------" << endl;
+                    cout << "Total recaudado: $";
+                    mostrarDinero(recaudacion);
+                    cout << endl;
+                    cout << "-----------------------------------------" << endl;
+                    system("pause");
+                }
+                break;
+            case 3:
+                {
+                    int mes, anio;
+                    cout << "Ingrese el mes (1-12): ";
+                    cin >> mes;
+                    cout << "Ingrese el anio: ";
+                    cin >> anio;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                    if (mes >= 1 && mes <= 12) {
+                        float recaudacion = archivoPol.calcularRecaudacionMensual(mes, anio);
+                        system("cls");
+                        cout << "-----------------------------------------" << endl;
+                        cout << "    RECAUDACION MENSUAL " << mes << "/" << anio << endl;
+                        cout << "-----------------------------------------" << endl;
+                        cout << "Total recaudado: $";
+                        mostrarDinero(recaudacion);
+                        cout << endl;
+                        cout << "-----------------------------------------" << endl;
+                    } else {
+                        cout << "Mes invalido. Debe estar entre 1 y 12." << endl;
+                    }
+                    system("pause");
+                }
+                break;
+            case 4:
+                {
+                    int semana, anio;
+                    cout << "Ingrese la semana (1-52): ";
+                    cin >> semana;
+                    cout << "Ingrese el anio: ";
+                    cin >> anio;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                    if (semana >= 1 && semana <= 52) {
+                        float recaudacion = archivoPol.calcularRecaudacionSemanal(semana, anio);
+                        system("cls");
+                        cout << "-----------------------------------------" << endl;
+                        cout << "    RECAUDACION SEMANAL " << semana << "/" << anio << endl;
+                        cout << "-----------------------------------------" << endl;
+                        cout << "Total recaudado: $";
+                        mostrarDinero(recaudacion);
+                        cout << endl;
+                        cout << "-----------------------------------------" << endl;
+                    } else {
+                        cout << "Semana invalida. Debe estar entre 1 y 52." << endl;
+                    }
+                    system("pause");
+                }
+                break;
+            case 5:
+                {
+                    Fecha fechaInicio, fechaFin;
+                    cout << "=== RECAUDACION PERSONALIZADA ===" << endl;
+                    cout << "Ingrese fecha de inicio:" << endl;
+                    fechaInicio.cargar();
+                    cout << "Ingrese fecha de fin:" << endl;
+                    fechaFin.cargar();
+
+                    float recaudacion = archivoPol.calcularRecaudacionPersonalizada(fechaInicio, fechaFin);
+                    system("cls");
+                    cout << "-----------------------------------------" << endl;
+                    cout << "    RECAUDACION PERSONALIZADA" << endl;
+                    cout << "-----------------------------------------" << endl;
+                    cout << "Periodo: " << fechaInicio.toString() << " a " << fechaFin.toString() << endl;
+                    cout << "Total recaudado: $";
+                    mostrarDinero(recaudacion);
+                    cout << endl;
+                    cout << "-----------------------------------------" << endl;
+                    system("pause");
+                }
+                break;
             case 0:
                 salirSubmenu = true;
                 break;

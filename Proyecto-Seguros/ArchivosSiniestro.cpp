@@ -2,6 +2,7 @@
 #include "siniestro.h"
 #include <iostream>
 #include <cstring>
+#include <limits>
 
 using namespace std;
 
@@ -33,7 +34,8 @@ int ArchivoSiniestro::agregarRegistro() {
 
     nuevoSiniestro.cargarId();
 
-    if (buscarSiniestro(nuevoSiniestro.getIdSiniestro()) != -1) {
+    int resultado = buscarSiniestro(nuevoSiniestro.getIdSiniestro());
+    if (resultado >= 0) {  // Solo si encontró un registro existente (posición válida >= 0)
         cout << "Error: ya existe un siniestro con el ID " << nuevoSiniestro.getIdSiniestro() << "." << endl;
         system("pause");
         return -2;
@@ -128,6 +130,7 @@ bool ArchivoSiniestro::modificarDatosSiniestro() {
     cout << "--- MODIFICAR SINIESTRO ---" << endl;
     cout << "Ingrese el ID del siniestro a modificar: ";
     cin >> idBuscado;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     int pos = buscarSiniestro(idBuscado);
 

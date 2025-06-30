@@ -76,7 +76,7 @@ void Siniestro::cargarDatos() {
     cin >> monto_reclamo;
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    cout << "Ingrese ID de la póliza: ";
+    cout << "Ingrese ID de la pï¿½liza: ";
     cin >> id_poliza;
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 

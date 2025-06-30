@@ -62,25 +62,20 @@ void Poliza::mostrar() const {
     cout << "Nro de poliza: " << _numeroPoliza << endl;
     cout << "DNI: " << _dni << endl;
     cout << "Patente: " << _patente << endl;
-    cout << "Fecha de inicio: ";
-    _fechaInicio.mostrar();
-    cout << endl;
-    cout << "Fecha de vencimiento: ";
-    _fechaVencimiento.mostrar();
-    cout << endl;
+    cout << "Fecha de inicio: " << _fechaInicio.toString() << endl;
+    cout << "Fecha de vencimiento: " << _fechaVencimiento.toString() << endl;
     cout << "Nombre: " << _nombre << endl;
     cout << "Apellido: " << _apellido << endl;
     cout << "Detalle de cobertura: " << _detalleCobertura << endl;
     cout << "Importe mensual: " << _importeMensual << endl;
     cout << "Estado: " << (_activo ? "Activa" : "Inactiva") << endl;
     cout << "-------------------------\n";
-
 }
 
 
 
 void Poliza::cargarId() {
-    cout << "Ingrese n�mero de p�liza: ";
+    cout << "Ingrese numero de poliza: ";
     cin >> _numeroPoliza;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -92,14 +87,8 @@ void Poliza::cargarDatos(){
     cin >> _dni;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout << "Ingrese patente del veh�culo: ";
+    cout << "Ingrese patente del vehiculo: ";
     cin.getline(_patente, 10);
-
-    cout << "Ingrese fecha de inicio:" << endl;
-    _fechaInicio.cargar();  // Debes tener un m�todo cargar() en la clase Fecha
-
-    cout << "Ingrese fecha de vencimiento:" << endl;
-    _fechaVencimiento.cargar();
 
     cout << "Ingrese nombre del titular: ";
     cin.getline(_nombre, 10);
@@ -110,11 +99,17 @@ void Poliza::cargarDatos(){
     cout << "Ingrese detalle de cobertura: ";
     cin.getline(_detalleCobertura, 40);
 
+    cout << "Ingrese fecha de inicio:" << endl;
+    _fechaInicio.cargar();
+
+    cout << "Ingrese fecha de vencimiento:" << endl;
+    _fechaVencimiento.cargar();
+
     cout << "Ingrese importe mensual: ";
     cin >> _importeMensual;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout << "�La p�liza est� activa? (1 para s�, 0 para no): ";
+    cout << "¿La poliza esta activa? (1 para si, 0 para no): ";
     cin >> _activo;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }

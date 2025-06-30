@@ -1,6 +1,8 @@
 #pragma once
 #include "Cliente.h"
 #include <string.h>
+#ifndef ARCHIVOSCLIENTES_H_INCLUDED
+#define ARCHIVOSCLIENTES_H_INCLUDED
 
 class ArchivoCliente {
 private:
@@ -22,3 +24,5 @@ public:
     bool bajaLogica(int idCliente);
     bool modificarDatosCliente();
 };
+
+#endif // ARCHIVOSCLIENTES_H_INCLUDED

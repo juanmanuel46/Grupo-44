@@ -2,6 +2,7 @@
 #include "Vehiculo.h"
 #include <iostream>
 #include <cstring>
+#include <limits>
 
 using namespace std;
 
@@ -33,7 +34,8 @@ int ArchivoVehiculo::agregarRegistro() {
 
     nuevoVehiculo.cargarId();
 
-    if (buscarVehiculo(nuevoVehiculo.getIdVehiculo()) != -1) {
+    int resultado = buscarVehiculo(nuevoVehiculo.getIdVehiculo());
+    if (resultado >= 0) {  // Solo si encontró un registro existente (posición válida >= 0)
         cout << "Error: ya existe un vehiculo con el ID " << nuevoVehiculo.getIdVehiculo() << "." << endl;
         system("pause");
         return -2;
@@ -128,6 +130,7 @@ bool ArchivoVehiculo::modificarDatosVehiculo() {
     cout << "--- MODIFICAR VEHICULO ---" << endl;
     cout << "Ingrese el ID del vehiculo a modificar: ";
     cin >> idBuscado;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     int pos = buscarVehiculo(idBuscado);
 

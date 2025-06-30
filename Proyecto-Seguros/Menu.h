@@ -8,6 +8,7 @@ void menuSiniestros();
 void menuVehiculos();
 void menuVencimientos();
 void menuInformes();
+void menuCompanias();
 
 #endif
 

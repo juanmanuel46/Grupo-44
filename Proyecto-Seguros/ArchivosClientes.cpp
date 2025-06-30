@@ -2,6 +2,7 @@
 #include "Cliente.h"
 #include <iostream>
 #include <cstring>
+#include <limits>
 
 using namespace std;
 
@@ -33,7 +34,8 @@ int ArchivoCliente::agregarRegistro() {
 
     nuevoCliente.cargarId();
 
-    if (buscarCliente(nuevoCliente.getIdCliente()) != -1) {
+    int resultado = buscarCliente(nuevoCliente.getIdCliente());
+    if (resultado >= 0) {  // Solo si encontró un registro existente (posición válida >= 0)
         cout << "Error: ya existe un cliente con el ID " << nuevoCliente.getIdCliente() << "." << endl;
         system("pause");
         return -2; 
@@ -129,6 +131,7 @@ bool ArchivoCliente::modificarDatosCliente() {
     cout << "--- MODIFICAR CLIENTE ---" << endl;
     cout << "Ingrese el ID del cliente a modificar: ";
     cin >> idBuscado;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     int pos = buscarCliente(idBuscado);
 
