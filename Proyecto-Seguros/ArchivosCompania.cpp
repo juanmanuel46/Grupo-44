@@ -11,7 +11,7 @@ int ArchivoCompania::buscarCompania(int idCompania) {
     pCompania = fopen(nombre, "rb");
 
     if (pCompania == nullptr) {
-        return -2; 
+        return -2;
     }
 
     int pos = 0;
@@ -24,7 +24,7 @@ int ArchivoCompania::buscarCompania(int idCompania) {
     }
 
     fclose(pCompania);
-    return -1; 
+    return -1;
 }
 
 int ArchivoCompania::agregarRegistro() {
@@ -37,16 +37,16 @@ int ArchivoCompania::agregarRegistro() {
     if (resultado >= 0) {
         cout << "Error: ya existe una compania con el ID " << nuevaCompania.getId() << "." << endl;
         system("pause");
-        return -2; 
+        return -2;
     }
-    
-    nuevaCompania.cargarDatos(); 
+
+    nuevaCompania.cargarDatos();
 
     FILE *pCompania;
     pCompania = fopen(nombre, "ab");
     if (pCompania == nullptr) {
         cout << "No se pudo abrir el archivo para escribir." << endl;
-        return -1; 
+        return -1;
     }
 
     int escribio = fwrite(&nuevaCompania, tamanioRegistro, 1, pCompania);
@@ -55,7 +55,6 @@ int ArchivoCompania::agregarRegistro() {
     if (escribio == 1) {
         cout << "\nCompania guardada con exito.\n" << endl;
     }
-    system("pause");
     return escribio;
 }
 
@@ -70,7 +69,7 @@ bool ArchivoCompania::listarRegistros() {
         system("pause");
         return false;
     }
-    
+
     bool hayCompaniasActivas = false;
     system("cls");
     cout << "LISTADO DE COMPANIAS" << endl;
@@ -95,9 +94,9 @@ Compania ArchivoCompania::leerRegistro(int pos) {
     Compania obj;
     FILE *pCompania;
     pCompania = fopen(nombre, "rb");
-    
+
     // Inicialización por si falla la apertura o lectura
-    obj.setId(-1); 
+    obj.setId(-1);
 
     if (pCompania == nullptr) {
         return obj;
@@ -156,7 +155,7 @@ bool ArchivoCompania::modificarDatosCompania() {
     cout << "\nCompania encontrada:" << endl;
     com.mostrar();
     cout << "\nIngrese los NUEVOS datos:" << endl;
-    
+
 
     com.cargarDatos(); // Asumo que carga todos los datos excepto el ID y estado.
 
@@ -165,7 +164,6 @@ bool ArchivoCompania::modificarDatosCompania() {
     } else {
         cout << "\nError al modificar la compania." << endl;
     }
-    system("pause");
     return true;
 }
 
@@ -176,9 +174,9 @@ bool ArchivoCompania::bajaLogica(int idCompania) {
         system("pause");
         return false;
     }
-    
+
     Compania reg = leerRegistro(pos);
-    
+
     if(!reg.getActivo()){
         cout << "La compania con ID " << idCompania << " ya se encuentra dada de baja." << endl;
         system("pause");
@@ -203,8 +201,6 @@ bool ArchivoCompania::bajaLogica(int idCompania) {
     } else {
         cout << "Eliminacion cancelada por el usuario." << endl;
     }
-
-    system("pause");
     return true;
 }
 

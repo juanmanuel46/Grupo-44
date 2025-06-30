@@ -50,6 +50,10 @@
 		<Unit filename="Fecha.h" />
 		<Unit filename="Menu.cpp" />
 		<Unit filename="Menu.h" />
+<<<<<<< Updated upstream
+=======
+		<Unit filename="MenuProyecto.cbp" />
+>>>>>>> Stashed changes
 		<Unit filename="Poliza.cpp" />
 		<Unit filename="Poliza.h" />
 		<Unit filename="main.cpp" />

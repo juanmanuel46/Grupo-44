@@ -127,7 +127,11 @@
 
 1750718028 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionesvehiculos.h
 
+<<<<<<< Updated upstream
 1751321692 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\menu.cpp
+=======
+1751240622 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\menu.cpp
+>>>>>>> Stashed changes
 	<iostream>
 	<cstdlib>
 	"Menu.h"
@@ -137,11 +141,16 @@
 
 1750713277 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionesclientes.h
 
+<<<<<<< Updated upstream
 1751321692 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\main.cpp
+=======
+1751313704 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\main.cpp
+>>>>>>> Stashed changes
 	<iostream>
 	<cstdlib>
 	<limits>
 	<cctype>
+	<conio.h>
 	"Menu.h"
 	"ArchivosClientes.h"
 	"ArchivosVehiculos.h"
@@ -166,7 +175,11 @@
 1751321889 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.h
 	<string>
 
+<<<<<<< Updated upstream
 1751318499 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.cpp
+=======
+1751285446 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.cpp
+>>>>>>> Stashed changes
 	"siniestro.h"
 	<iostream>
 	<cstring>
@@ -304,6 +317,44 @@
 	<cstring>
 	<limits>
 
+<<<<<<< Updated upstream
+=======
+1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosclientes.h
+	"Cliente.h"
+	<string.h>
+
+1751239104 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosvehiculos.h
+	"Vehiculo.h"
+	<string.h>
+
+1751239104 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivossiniestro.h
+	"siniestro.h"
+	<string.h>
+
+1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivoscompania.h
+	"Compania.h"
+	<string.h>
+
+1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\compania.h
+
+1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivospoliza.h
+	"Poliza.h"
+	<string.h>
+
+1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.h
+	<cstring>
+	"Fecha.h"
+
+1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\fecha.h
+	<string>
+
+1751285445 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.cpp
+	"Poliza.h"
+	<iostream>
+	<limits>
+	<cstring>
+
+>>>>>>> Stashed changes
 1751285445 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosclientes.cpp
 	"ArchivosClientes.h"
 	"Cliente.h"
@@ -311,6 +362,7 @@
 	<cstring>
 	<limits>
 
+<<<<<<< Updated upstream
 1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosclientes.h
 	"Cliente.h"
 	<string.h>
@@ -319,11 +371,15 @@
 	<string>
 
 1751316169 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivoscompania.cpp
+=======
+1751292883 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivoscompania.cpp
+>>>>>>> Stashed changes
 	"ArchivosCompania.h"
 	"Compania.h"
 	<iostream>
 	<cstring>
 
+<<<<<<< Updated upstream
 1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivoscompania.h
 	"Compania.h"
 	<string.h>
@@ -331,6 +387,9 @@
 1751321861 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\compania.h
 
 1751319597 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivospoliza.cpp
+=======
+1751313289 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivospoliza.cpp
+>>>>>>> Stashed changes
 	"ArchivosPoliza.h"
 	"Poliza.h"
 	"ArchivosSiniestro.h"
@@ -339,6 +398,7 @@
 	<ctime>
 	<limits>
 
+<<<<<<< Updated upstream
 1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivospoliza.h
 	"Poliza.h"
 	<string.h>
@@ -351,6 +411,8 @@
 	"siniestro.h"
 	<string.h>
 
+=======
+>>>>>>> Stashed changes
 1751285445 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivossiniestro.cpp
 	"ArchivosSiniestro.h"
 	"siniestro.h"
@@ -365,16 +427,21 @@
 	<cstring>
 	<limits>
 
+<<<<<<< Updated upstream
 1751239104 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosvehiculos.h
 	"Vehiculo.h"
 	<string.h>
 
 1751322103 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\compania.cpp
+=======
+1751285445 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\compania.cpp
+>>>>>>> Stashed changes
 	"Compania.h"
 	<cstring>
 	<iostream>
 	<limits>
 
+<<<<<<< Updated upstream
 1751322071 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\fecha.cpp
 	<iostream>
 	<string>
@@ -387,3 +454,10 @@
 	<limits>
 	<cstring>
 
+=======
+1751285445 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\fecha.cpp
+	<iostream>
+	<string>
+	"Fecha.h"
+
+>>>>>>> Stashed changes

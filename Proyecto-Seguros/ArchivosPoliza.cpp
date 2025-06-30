@@ -267,6 +267,7 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
 
             // Si vence dentro del rango especificado (incluyendo ya vencidas)
             if (diferenciaDias <= diasAnticipacion && diferenciaDias >= -30) {
+<<<<<<< Updated upstream
             cout << "Poliza: " << obj.getNumeroPoliza()
              << " | Cliente: " << obj.getNombre() << " " << obj.getApellido()
              << " | Patente: " << obj.getPatente()
@@ -284,11 +285,35 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
 
             hayVencimientos = true;
 
+=======
+                if (!hayVencimientos) {
+                    cout << "Poliza - Cliente - Patente - Vencimiento - Estado" << endl;
+                    cout << "----------------------------------------" << endl;
+                }
+
+                cout << "Poliza: " << obj.getNumeroPoliza()
+                      << " | Cliente: " << obj.getNombre() << " " << obj.getApellido()
+                     << " | Patente: " << obj.getPatente()
+                     << " | Vencimiento: " << fechaVenc.toString()
+                     << " | Estado: ";
+
+                if (diferenciaDias < 0) {
+                    cout << "VENCIDA";
+                } else if (diferenciaDias <= 7) {
+                    cout << "URGENTE";
+                } else {
+                    cout << "PROXIMO";
+                }
+                cout << endl;
+
+                hayVencimientos = true;
+>>>>>>> Stashed changes
             }
         }
     }
 
     fclose(pPoliza);
+
 
     if (!hayVencimientos) {
         cout << "No hay polizas proximas a vencer en los proximos " << diasAnticipacion << " dias." << endl;
@@ -296,8 +321,12 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
 
     cout << "========================================" << endl;
     cout << "0 - Volver al menu principal" << endl;
+<<<<<<< Updated upstream
 
     system("pause");
+=======
+    system("Pause");
+>>>>>>> Stashed changes
     return true;
 }
 
@@ -316,7 +345,6 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
     FILE *pPoliza = fopen(nombre, "rb");
     if (pPoliza == nullptr) {
         cout << "No se pudo abrir el archivo de polizas." << endl;
-        system("pause");
         return false;
     }
 
@@ -393,7 +421,6 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
     }
 
     cout << "========================================" << endl;
-    system("pause");
     return true;
 }
 

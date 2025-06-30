@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <limits>
 #include <cctype>
+#include <conio.h>
 #include "Menu.h"
 #include "ArchivosClientes.h"
 #include "ArchivosVehiculos.h"
@@ -408,7 +409,6 @@ void menuInformes() {
                     mostrarDinero(recaudacion);
                     cout << endl;
                     cout << "-----------------------------------------" << endl;
-                    system("pause");
                 }
                 break;
             case 3:
@@ -433,7 +433,6 @@ void menuInformes() {
                     } else {
                         cout << "Mes invalido. Debe estar entre 1 y 12." << endl;
                     }
-                    system("pause");
                 }
                 break;
             case 4:
@@ -458,7 +457,6 @@ void menuInformes() {
                     } else {
                         cout << "Semana invalida. Debe estar entre 1 y 52." << endl;
                     }
-                    system("pause");
                 }
                 break;
             case 5:
@@ -480,7 +478,6 @@ void menuInformes() {
                     mostrarDinero(recaudacion);
                     cout << endl;
                     cout << "-----------------------------------------" << endl;
-                    system("pause");
                 }
                 break;
             case 0:
@@ -488,7 +485,6 @@ void menuInformes() {
                 break;
             default:
                 cout << "Opcion invalida.\n";
-                system("pause");
                 break;
         }
         if (opcion >= 1 && opcion <= 5) {
