@@ -45,6 +45,7 @@ public:
     void cargar();
     void cargarId();
     void cargarDatos();
+    void buscarCliente(int getDni);
 };
 
 #endif

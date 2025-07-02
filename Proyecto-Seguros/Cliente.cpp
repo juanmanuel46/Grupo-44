@@ -150,3 +150,4 @@ void Cliente::cargar() {
     cargarId();
     cargarDatos();
 }
+

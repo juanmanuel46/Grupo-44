@@ -52,6 +52,7 @@ public:
 
     void cargar();
     void cargarId();
+    void cargarDNI();
     void cargarDatos();
     void mostrar() ;
 

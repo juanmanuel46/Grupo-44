@@ -1,6 +1,7 @@
 #include "ArchivosPoliza.h"
 #include "Poliza.h"
 #include "ArchivosSiniestro.h"
+#include "ArchivosClientes.h"
 #include <iostream>
 #include <cstring>
 #include <ctime>
@@ -16,6 +17,7 @@ int ArchivoPoliza::buscarPoliza(int numeroPoliza) {
     if (pPoliza == nullptr) {
         return -2;
     }
+
 
     int pos = 0;
     while (fread(&obj, tamanioRegistro, 1, pPoliza) == 1) {
@@ -41,6 +43,16 @@ int ArchivoPoliza::agregarRegistro() {
         cout << "Error: ya existe una poliza con el numero " << nuevaPoliza.getNumeroPoliza() << "." << endl;
         system("pause");
         return -2;
+    }
+
+    nuevaPoliza.cargarDNI();
+
+    ArchivoCliente archivoCliente("clientes.dat");
+    int clienteExiste = archivoCliente.buscarClienteDni(nuevaPoliza.getDni());
+    if (clienteExiste < 0) {
+        cout << "Error: el cliente con DNI " << nuevaPoliza.getDni() << " no existe." << endl;
+        system("pause");
+        return -3;
     }
 
     nuevaPoliza.cargarDatos();

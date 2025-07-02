@@ -18,6 +18,7 @@ public:
     int agregarRegistro();
     bool listarRegistros();
     int buscarCliente(int idCliente);
+    int buscarClienteDni(int dniCliente);
     Cliente leerRegistro(int pos);
     bool modificarRegistro(Cliente reg, int pos);
     int contarRegistros();

@@ -112,14 +112,14 @@
 	<cstring>
 	<limits>
 
-1751325406 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\cliente.cpp
+1751417949 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\cliente.cpp
 	"Cliente.h"
 	"Fecha.h"
 	<iostream>
 	<cstring>
 	<limits>
 
-1751325427 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\cliente.h
+1751417949 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\cliente.h
 	"Fecha.h"
 
 1750984321 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\vehiculo.h
@@ -127,7 +127,7 @@
 
 1750718028 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\funcionesvehiculos.h
 
-1751325340 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\menu.cpp
+1751415160 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\menu.cpp
 	<iostream>
 	<cstdlib>
 	<limits>
@@ -299,14 +299,14 @@
 	<cstring>
 	<limits>
 
-1751285445 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosclientes.cpp
+1751417949 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosclientes.cpp
 	"ArchivosClientes.h"
 	"Cliente.h"
 	<iostream>
 	<cstring>
 	<limits>
 
-1751285445 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosclientes.h
+1751418020 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivosclientes.h
 	"Cliente.h"
 	<string.h>
 
@@ -325,10 +325,11 @@
 
 1751325499 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\compania.h
 
-1751324220 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivospoliza.cpp
+1751418870 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\archivospoliza.cpp
 	"ArchivosPoliza.h"
 	"Poliza.h"
 	"ArchivosSiniestro.h"
+	"ArchivosClientes.h"
 	<iostream>
 	<cstring>
 	<ctime>
@@ -338,7 +339,7 @@
 	"Poliza.h"
 	<string.h>
 
-1751325473 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.h
+1751418917 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.h
 	<cstring>
 	"Fecha.h"
 
@@ -376,7 +377,7 @@
 	<limits>
 	"Fecha.h"
 
-1751325547 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.cpp
+1751418998 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.cpp
 	"Poliza.h"
 	<iostream>
 	<limits>

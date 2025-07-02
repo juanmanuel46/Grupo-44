@@ -12,7 +12,7 @@ int ArchivoCliente::buscarCliente(int idCliente) {
     pCliente = fopen(nombre, "rb");
 
     if (pCliente == nullptr) {
-        return -2; 
+        return -2;
     }
 
     int pos = 0;
@@ -25,7 +25,29 @@ int ArchivoCliente::buscarCliente(int idCliente) {
     }
 
     fclose(pCliente);
-    return -1; 
+    return -1;
+}
+
+int ArchivoCliente::buscarClienteDni(int dniCliente) {
+    Cliente obj;
+    FILE *pCliente;
+    pCliente = fopen(nombre, "rb");
+
+    if (pCliente == nullptr) {
+        return -2;
+    }
+
+    int pos = 0;
+    while (fread(&obj, tamanioRegistro, 1, pCliente) == 1) {
+        if (obj.getDni() == dniCliente) {
+            fclose(pCliente);
+            return pos;
+        }
+        pos++;
+    }
+
+    fclose(pCliente);
+    return -1;
 }
 
 int ArchivoCliente::agregarRegistro() {
@@ -38,16 +60,16 @@ int ArchivoCliente::agregarRegistro() {
     if (resultado >= 0) {  // Solo si encontró un registro existente (posición válida >= 0)
         cout << "Error: ya existe un cliente con el ID " << nuevoCliente.getIdCliente() << "." << endl;
         system("pause");
-        return -2; 
+        return -2;
     }
-    
-    nuevoCliente.cargarDatos(); 
+
+    nuevoCliente.cargarDatos();
 
     FILE *pCliente;
     pCliente = fopen(nombre, "ab");
     if (pCliente == nullptr) {
         cout << "No se pudo abrir el archivo para escribir." << endl;
-        return -1; 
+        return -1;
     }
 
     int escribio = fwrite(&nuevoCliente, tamanioRegistro, 1, pCliente);
@@ -71,7 +93,7 @@ bool ArchivoCliente::listarRegistros() {
         system("pause");
         return false;
     }
-    
+
     bool hayClientesActivos = false;
     system("cls");
     cout << "LISTADO DE CLIENTES" << endl;
@@ -96,9 +118,9 @@ Cliente ArchivoCliente::leerRegistro(int pos) {
     Cliente obj;
     FILE *pCliente;
     pCliente = fopen(nombre, "rb");
-    
+
     // Inicialización por si falla la apertura o lectura
-    obj.setIdCliente(-1); 
+    obj.setIdCliente(-1);
 
     if (pCliente == nullptr) {
         return obj;
@@ -177,9 +199,9 @@ bool ArchivoCliente::bajaLogica(int idCliente) {
         system("pause");
         return false;
     }
-    
+
     Cliente reg = leerRegistro(pos);
-    
+
     if(!reg.getActivo()){
         cout << "El cliente con ID " << idCliente << " ya se encuentra dado de baja." << endl;
         system("pause");

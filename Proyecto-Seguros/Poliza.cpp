@@ -11,8 +11,6 @@ Poliza::Poliza() {
     strcpy(_patente, "");
     _fechaInicio = Fecha();
     _fechaVencimiento = Fecha();
-    strcpy(_nombre, "");
-    strcpy(_apellido, "");
     strcpy(_detalleCobertura, "");
     _importeMensual = 0.0f;
     _activo = true;
@@ -64,8 +62,6 @@ void Poliza::mostrar()  {
     cout << "Patente: " << _patente << endl;
     cout << "Fecha de inicio: " << _fechaInicio.toString() << endl;
     cout << "Fecha de vencimiento: " << _fechaVencimiento.toString() << endl;
-    cout << "Nombre: " << _nombre << endl;
-    cout << "Apellido: " << _apellido << endl;
     cout << "Detalle de cobertura: " << _detalleCobertura << endl;
     cout << "Importe mensual: " << _importeMensual << endl;
     cout << "Estado: " << (_activo ? "Activa" : "Inactiva") << endl;
@@ -80,21 +76,16 @@ void Poliza::cargarId() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 }
-
-
-void Poliza::cargarDatos(){
+void Poliza::cargarDNI() {
     cout << "Ingrese DNI del titular: ";
     cin >> _dni;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
+
+void Poliza::cargarDatos(){
 
     cout << "Ingrese patente del vehiculo: ";
     cin.getline(_patente, 10);
-
-    cout << "Ingrese nombre del titular: ";
-    cin.getline(_nombre, 10);
-
-    cout << "Ingrese apellido del titular: ";
-    cin.getline(_apellido, 10);
 
     cout << "Ingrese detalle de cobertura: ";
     cin.getline(_detalleCobertura, 40);
@@ -116,5 +107,6 @@ void Poliza::cargarDatos(){
 
 void Poliza::cargar() {
     cargarId();
+    cargarDNI();
     cargarDatos();
 }
