@@ -167,7 +167,7 @@
 1751325459 c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.h
 	<string>
 
-1751324220 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.cpp
+1751325547 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\siniestro.cpp
 	"siniestro.h"
 	<iostream>
 	<cstring>
@@ -364,7 +364,7 @@
 	"Vehiculo.h"
 	<string.h>
 
-1751325527 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\compania.cpp
+1751414864 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\compania.cpp
 	"Compania.h"
 	<cstring>
 	<iostream>
@@ -376,7 +376,7 @@
 	<limits>
 	"Fecha.h"
 
-1751324220 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.cpp
+1751325547 source:c:\users\juan\desktop\proyectos-git\grupo-44\proyecto-seguros\poliza.cpp
 	"Poliza.h"
 	<iostream>
 	<limits>

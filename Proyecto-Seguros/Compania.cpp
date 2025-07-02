@@ -12,8 +12,6 @@ Compania::Compania() {
     _activo = true;
 }
 
-// Getters
-
 const char* Compania::getNombre()  {
     return _nombre;
 }
@@ -29,8 +27,6 @@ float Compania::getComision()  {
 bool Compania::getActivo()  {
     return _activo;
 }
-
-// Setters
 
 void Compania::setNombre(const char* nombre) {
     strncpy(_nombre, nombre, sizeof(_nombre) - 1);
@@ -48,8 +44,6 @@ void Compania::setComision(float comision) {
 void Compania::setActivo(bool valor) {
     _activo = valor;
 }
-
-// Métodos funcionales
 
 void Compania::mostrar()  {
     cout << "ID Compania: " << _id << endl;
