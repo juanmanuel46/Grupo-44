@@ -53,6 +53,7 @@ public:
     void cargar();
     void cargarId();
     void cargarDNI();
+    void cargarPatente();
     void cargarDatos();
     void mostrar() ;
 

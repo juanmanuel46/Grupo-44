@@ -82,10 +82,13 @@ void Poliza::cargarDNI() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
-void Poliza::cargarDatos(){
+void Poliza::cargarPatente(){
 
     cout << "Ingrese patente del vehiculo: ";
     cin.getline(_patente, 10);
+}
+
+void Poliza::cargarDatos(){
 
     cout << "Ingrese detalle de cobertura: ";
     cin.getline(_detalleCobertura, 40);
@@ -108,5 +111,6 @@ void Poliza::cargarDatos(){
 void Poliza::cargar() {
     cargarId();
     cargarDNI();
+    cargarPatente();
     cargarDatos();
 }

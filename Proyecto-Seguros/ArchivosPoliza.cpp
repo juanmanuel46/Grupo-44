@@ -2,6 +2,7 @@
 #include "Poliza.h"
 #include "ArchivosSiniestro.h"
 #include "ArchivosClientes.h"
+#include "ArchivosVehiculos.h"
 #include <iostream>
 #include <cstring>
 #include <ctime>
@@ -53,6 +54,16 @@ int ArchivoPoliza::agregarRegistro() {
         cout << "Error: el cliente con DNI " << nuevaPoliza.getDni() << " no existe." << endl;
         system("pause");
         return -3;
+    }
+
+    nuevaPoliza.cargarPatente();
+
+    ArchivoVehiculo archivoVehiculo("vehiculos.dat");
+    int patenteExiste = archivoVehiculo.buscarPatente(nuevaPoliza.getPatente());
+    if (patenteExiste < 0) {
+        cout << "Error: el vehiculo con patente " << nuevaPoliza.getPatente() << " no existe." << endl;
+        system("pause");
+        return -4;
     }
 
     nuevaPoliza.cargarDatos();

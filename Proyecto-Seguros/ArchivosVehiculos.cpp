@@ -12,7 +12,7 @@ int ArchivoVehiculo::buscarVehiculo(int idVehiculo) {
     pVehiculo = fopen(nombre, "rb");
 
     if (pVehiculo == nullptr) {
-        return -2; 
+        return -2;
     }
 
     int pos = 0;
@@ -25,7 +25,29 @@ int ArchivoVehiculo::buscarVehiculo(int idVehiculo) {
     }
 
     fclose(pVehiculo);
-    return -1; 
+    return -1;
+}
+
+int ArchivoVehiculo::buscarPatente(const char* patente) {
+    Vehiculo obj;
+    FILE *pVehiculo;
+    pVehiculo = fopen(nombre, "rb");
+
+    if (pVehiculo == nullptr) {
+        return -2;
+    }
+
+    int pos = 0;
+    while (fread(&obj, tamanioRegistro, 1, pVehiculo) == 1) {
+        if (strcmp(obj.getPatente(), patente) == 0) {
+            fclose(pVehiculo);
+            return pos;
+        }
+        pos++;
+    }
+
+    fclose(pVehiculo);
+    return -1;
 }
 
 int ArchivoVehiculo::agregarRegistro() {
@@ -40,8 +62,8 @@ int ArchivoVehiculo::agregarRegistro() {
         system("pause");
         return -2;
     }
-    
-    nuevoVehiculo.cargarDatos(); 
+
+    nuevoVehiculo.cargarDatos();
 
     FILE *pVehiculo;
     pVehiculo = fopen(nombre, "ab");
@@ -71,7 +93,7 @@ bool ArchivoVehiculo::listarRegistros() {
         system("pause");
         return false;
     }
-    
+
     bool hayVehiculosActivos = false;
     system("cls");
     cout << "LISTADO DE VEHICULOS" << endl;
@@ -96,8 +118,8 @@ Vehiculo ArchivoVehiculo::leerRegistro(int pos) {
     Vehiculo obj;
     FILE *pVehiculo;
     pVehiculo = fopen(nombre, "rb");
-    
-    obj.setIdVehiculo(-1); 
+
+    obj.setIdVehiculo(-1);
 
     if (pVehiculo == nullptr) {
         return obj;
@@ -152,7 +174,7 @@ bool ArchivoVehiculo::modificarDatosVehiculo() {
     v.mostrar();
     cout << "\nIngrese los NUEVOS datos:" << endl;
 
-    v.cargarDatos(); 
+    v.cargarDatos();
 
     if (modificarRegistro(v, pos)) {
         cout << "\nVehiculo modificado exitosamente." << endl;
@@ -169,16 +191,16 @@ bool ArchivoVehiculo::bajaLogica() {
     cout << "--- ELIMINAR VEHICULO ---" << endl;
     cout << "Ingrese el ID del vehiculo a eliminar: ";
     cin >> idBuscado;
-    
+
     int pos = buscarVehiculo(idBuscado);
     if (pos < 0) {
         cout << "No se encontro el vehiculo con ID " << idBuscado << " o hubo un error." << endl;
         system("pause");
         return false;
     }
-    
+
     Vehiculo reg = leerRegistro(pos);
-    
+
     if(!reg.getActivo()){
         cout << "El vehiculo con ID " << idBuscado << " ya se encuentra dado de baja." << endl;
         system("pause");

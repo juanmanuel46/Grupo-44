@@ -1,7 +1,7 @@
 #ifndef ARCHIVOSVEHICULOS_H_INCLUDED
 #define ARCHIVOSVEHICULOS_H_INCLUDED
 
-#include "Vehiculo.h" 
+#include "Vehiculo.h"
 #include <string.h>
 
 class ArchivoVehiculo {
@@ -18,6 +18,7 @@ public:
     int agregarRegistro();
     bool listarRegistros();
     int buscarVehiculo(int idVehiculo);
+    int buscarPatente(const char* patente);
     Vehiculo leerRegistro(int pos);
     bool modificarRegistro(Vehiculo reg, int pos);
     int contarRegistros();
