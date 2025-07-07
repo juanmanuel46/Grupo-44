@@ -43,8 +43,14 @@ void menuClientes() {
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
-        cin >> opcion;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        if (!(cin >> opcion)) {
+            cout << "\nEntrada invalida. Por favor ingrese un numero valido.\n" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            system("pause");
+            opcion= 5;
+        }
 
         switch(opcion) {
             case 1:
@@ -66,6 +72,8 @@ void menuClientes() {
                 }
                 break;
             case 0:
+                break;
+            case 5:
                 break;
             default:
                 cout << "Opcion invalida.\n";
