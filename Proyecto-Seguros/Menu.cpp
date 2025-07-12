@@ -40,6 +40,7 @@ void menuClientes() {
         cout << "2 - Agregar Cliente\n";
         cout << "3 - Modificar Cliente\n";
         cout << "4 - Eliminar Cliente\n";
+        cout << "5 - Exportar Clientes a CSV\n";
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
@@ -71,9 +72,10 @@ void menuClientes() {
                     archivoCli.bajaLogica(id);
                 }
                 break;
-            case 0:
-                break;
             case 5:
+                archivoCli.exportarCSV("clientes.csv");
+                break;
+            case 0:
                 break;
             default:
                 cout << "Opcion invalida.\n";
@@ -81,7 +83,7 @@ void menuClientes() {
                 break;
         }
 
-        if (opcion >= 1 && opcion <= 4) {
+        if (opcion >= 1 && opcion <= 5) {
             system("pause");
         }
     } while(opcion != 0);
@@ -98,6 +100,7 @@ void menuPolizas() {
         cout << "2 - Agregar Poliza\n";
         cout << "3 - Modificar Poliza\n";
         cout << "4 - Eliminar Poliza\n";
+        cout << "5 - Exportar Polizas a CSV\n";
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
@@ -123,6 +126,10 @@ void menuPolizas() {
                     archivoPol.bajaLogica(numero);
                 }
                 break;
+            case 5:
+                archivoPol.exportarCSV("polizas.csv");
+                system("pause");
+                break;
             case 0:
                 break;
             default:
@@ -144,6 +151,7 @@ void menuSiniestros() {
         cout << "2 - Agregar Siniestro\n";
         cout << "3 - Modificar Siniestro\n";
         cout << "4 - Eliminar Siniestro\n";
+        cout << "5 - Exportar Siniestros a CSV\n";
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
@@ -169,6 +177,9 @@ void menuSiniestros() {
                     archivoSin.bajaLogica();
                 }
                 break;
+            case 5:
+                archivoSin.exportarCSV("siniestros.csv");
+                break;
             case 0:
                 break;
             default:
@@ -177,7 +188,7 @@ void menuSiniestros() {
                 break;
         }
 
-        if (opcion >= 1 && opcion <= 4) {
+        if (opcion >= 1 && opcion <= 5) {
             system("pause");
         }
     } while(opcion != 0);
@@ -194,6 +205,7 @@ void menuVehiculos() {
         cout << "2 - Agregar Vehiculo\n";
         cout << "3 - Modificar Vehiculo\n";
         cout << "4 - Eliminar Vehiculo\n";
+        cout << "5 - Exportar Vehiculos a CSV\n";
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
@@ -219,6 +231,9 @@ void menuVehiculos() {
                     archivoVeh.bajaLogica();
                 }
                 break;
+            case 5:
+                archivoVeh.exportarCSV("vehiculos.csv");
+                break;
             case 0:
                 break;
             default:
@@ -227,7 +242,7 @@ void menuVehiculos() {
                 break;
         }
 
-        if (opcion >= 1 && opcion <= 4) {
+        if (opcion >= 1 && opcion <= 5) {
             system("pause");
         }
     } while(opcion != 0);
@@ -244,6 +259,7 @@ void menuCompanias() {
         cout << "2 - Agregar Compania\n";
         cout << "3 - Modificar Compania\n";
         cout << "4 - Eliminar Compania\n";
+        cout << "5 - Exportar Companias a CSV\n";
         cout << "----------------------------\n";
         cout << "0 - Volver al menu principal\n";
         cout << "Ingrese una opcion: ";
@@ -269,6 +285,9 @@ void menuCompanias() {
                     archivoCom.bajaLogica(id);
                 }
                 break;
+            case 5:
+                archivoCom.exportarCSV("companias.csv");
+                break;
             case 0:
                 break;
             default:
@@ -277,7 +296,7 @@ void menuCompanias() {
                 break;
         }
 
-        if (opcion >= 1 && opcion <= 4) {
+        if (opcion >= 1 && opcion <= 5) {
             system("pause");
         }
     } while(opcion != 0);
@@ -400,6 +419,89 @@ void menuInformes() {
                     mostrarDinero(recaudacion);
                     cout << endl;
                     cout << "-----------------------------------------" << endl;
+                    system("pause");
+                }
+                break;
+            case 0:
+                break;
+            default:
+                cout << "Opcion invalida.\n";
+                system("pause");
+                break;
+        }
+    } while(opcion != 0);
+}
+
+void menuExportarCSV() {
+    int opcion;
+    do {
+        system("cls");
+        cout << "Exportar a CSV\n";
+        cout << "-----------------------------\n";
+        cout << "1 - Exportar Clientes\n";
+        cout << "2 - Exportar Polizas\n";
+        cout << "3 - Exportar Siniestros\n";
+        cout << "4 - Exportar Companias\n";
+        cout << "5 - Exportar Vehiculos\n";
+        cout << "6 - Exportar TODOS los datos\n";
+        cout << "-----------------------------\n";
+        cout << "0 - Volver al menu principal\n";
+        cout << "Ingrese una opcion: ";
+        cin >> opcion;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        switch(opcion) {
+            case 1:
+                {
+                    ArchivoCliente archivo;
+                    archivo.exportarCSV("clientes.csv");
+                    system("pause");
+                }
+                break;
+            case 2:
+                {
+                    ArchivoPoliza archivo;
+                    archivo.exportarCSV("polizas.csv");
+                    system("pause");
+                }
+                break;
+            case 3:
+                {
+                    ArchivoSiniestro archivo;
+                    archivo.exportarCSV("siniestros.csv");
+                    system("pause");
+                }
+                break;
+            case 4:
+                {
+                    ArchivoCompania archivo;
+                    archivo.exportarCSV("companias.csv");
+                    system("pause");
+                }
+                break;
+            case 5:
+                {
+                    ArchivoVehiculo archivo;
+                    archivo.exportarCSV("vehiculos.csv");
+                    system("pause");
+                }
+                break;
+            case 6:
+                {
+                    cout << "Exportando todos los datos...\n" << endl;
+                    ArchivoCliente archivoClientes;
+                    ArchivoPoliza archivoPolizas;
+                    ArchivoSiniestro archivoSiniestros;
+                    ArchivoCompania archivoCompanias;
+                    ArchivoVehiculo archivoVehiculos;
+                    
+                    archivoClientes.exportarCSV("clientes.csv");
+                    archivoPolizas.exportarCSV("polizas.csv");
+                    archivoSiniestros.exportarCSV("siniestros.csv");
+                    archivoCompanias.exportarCSV("companias.csv");
+                    archivoVehiculos.exportarCSV("vehiculos.csv");
+                    
+                    cout << "\nTodos los archivos CSV han sido exportados exitosamente!" << endl;
                     system("pause");
                 }
                 break;

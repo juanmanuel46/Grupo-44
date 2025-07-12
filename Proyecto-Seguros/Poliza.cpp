@@ -22,8 +22,6 @@ int Poliza::getDni()  { return _dni; }
 const char* Poliza::getPatente()  { return _patente; }
 const Fecha& Poliza::getFechaInicio()  { return _fechaInicio; }
 const Fecha& Poliza::getFechaVencimiento()  { return _fechaVencimiento; }
-const char* Poliza::getNombre()  { return _nombre; }
-const char* Poliza::getApellido()  { return _apellido; }  // A�adido (faltaba en .h)
 const char* Poliza::getDetalleCobertura()  { return _detalleCobertura; }
 float Poliza::getImporteMensual()  { return _importeMensual; }
 bool Poliza::isActivo()  { return _activo; }  // Corregido: _activo
@@ -37,14 +35,7 @@ void Poliza::setPatente(const char* patente) {
 }
 void Poliza::setFechaInicio(const Fecha& fecha) { _fechaInicio = fecha; }
 void Poliza::setFechaVencimiento(const Fecha& fecha) { _fechaVencimiento = fecha; }
-void Poliza::setNombre(const char* nombre) {
-    strncpy(_nombre, nombre, 9);
-    _nombre[9] = '\0';
-}
-void Poliza::setApellido(const char* apellido) {  // A�adido (faltaba en .h)
-    strncpy(_apellido, apellido, 9);
-    _apellido[9] = '\0';
-}
+
 void Poliza::setDetalleCobertura(const char* detalle) {
     strncpy(_detalleCobertura, detalle, 39);
     _detalleCobertura[39] = '\0';

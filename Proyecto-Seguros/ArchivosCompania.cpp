@@ -2,6 +2,7 @@
 #include "Compania.h"
 #include <iostream>
 #include <cstring>
+#include <fstream>
 
 using namespace std;
 
@@ -221,6 +222,42 @@ int ArchivoCompania::contarRegistros() {
     fclose(pCompania);
 
     return tam / tamanioRegistro;
+}
+
+bool ArchivoCompania::exportarCSV(const char* nombreArchivo) {
+    Compania obj;
+    FILE *pCompania;
+    pCompania = fopen(nombre, "rb");
+    
+    if (pCompania == nullptr) {
+        cout << "No se pudo abrir el archivo de companias." << endl;
+        return false;
+    }
+    
+    ofstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        cout << "No se pudo crear el archivo CSV." << endl;
+        fclose(pCompania);
+        return false;
+    }
+    
+    // Escribir encabezados
+    archivo << "ID,Nombre,Comision,Activo\n";
+    
+    // Escribir datos
+    while (fread(&obj, tamanioRegistro, 1, pCompania) == 1) {
+        if (obj.getActivo()) {
+            archivo << obj.getId() << ","
+                   << obj.getNombre() << ","
+                   << obj.getComision() << ","
+                   << (obj.getActivo() ? "Si" : "No") << "\n";
+        }
+    }
+    
+    fclose(pCompania);
+    archivo.close();
+    cout << "Archivo CSV exportado exitosamente: " << nombreArchivo << endl;
+    return true;
 }
 
 

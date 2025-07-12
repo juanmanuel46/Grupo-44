@@ -23,6 +23,7 @@ public:
     int contarRegistros();
     bool bajaLogica();
     bool modificarDatosSiniestro();
+    bool exportarCSV(const char* nombreArchivo = "siniestros.csv");
 };
 
 

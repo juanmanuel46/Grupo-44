@@ -25,6 +25,7 @@ public:
     int contarRegistros();
     bool bajaLogica(int idCompania);
     bool modificarDatosCompania();
+    bool exportarCSV(const char* nombreArchivo = "companias.csv");
 };
 
 #endif // ARCHIVOSCOMPANIA_H_INCLUDED

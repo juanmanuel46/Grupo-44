@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstring>
 #include <limits>
+#include <fstream>
 
 using namespace std;
 
@@ -243,4 +244,46 @@ int ArchivoCliente::contarRegistros() {
     fclose(pCliente);
 
     return tam / tamanioRegistro;
+}
+
+bool ArchivoCliente::exportarCSV(const char* nombreArchivo) {
+    Cliente obj;
+    FILE *pCliente;
+    pCliente = fopen(nombre, "rb");
+    
+    if (pCliente == nullptr) {
+        cout << "No se pudo abrir el archivo de clientes." << endl;
+        return false;
+    }
+    
+    ofstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        cout << "No se pudo crear el archivo CSV." << endl;
+        fclose(pCliente);
+        return false;
+    }
+    
+    // Escribir encabezados
+    archivo << "ID,Nombre,Apellido,DNI,Fecha_Nacimiento,Activo,Domicilio,Email,Telefono\n";
+    
+    // Escribir datos
+    while (fread(&obj, tamanioRegistro, 1, pCliente) == 1) {
+        if (obj.getActivo()) {
+            Fecha fecha = obj.getFechaNacimiento();
+            archivo << obj.getIdCliente() << ","
+                   << obj.getNombre() << ","
+                   << obj.getApellido() << ","
+                   << obj.getDni() << ","
+                   << fecha.getDia() << "/" << fecha.getMes() << "/" << fecha.getAnio() << ","
+                   << (obj.getActivo() ? "Si" : "No") << ","
+                   << obj.getDomicilio() << ","
+                   << obj.getEmail() << ","
+                   << obj.getTelefono() << "\n";
+        }
+    }
+    
+    fclose(pCliente);
+    archivo.close();
+    cout << "Archivo CSV exportado exitosamente: " << nombreArchivo << endl;
+    return true;
 }

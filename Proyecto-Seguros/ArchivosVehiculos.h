@@ -24,6 +24,7 @@ public:
     int contarRegistros();
     bool bajaLogica();
     bool modificarDatosVehiculo();
+    bool exportarCSV(const char* nombreArchivo = "vehiculos.csv");
 };
 
 #endif // ARCHIVOSVEHICULOS_H_INCLUDED

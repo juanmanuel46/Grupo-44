@@ -25,6 +25,7 @@ void menuPrincipal() {
         cout << "5 - Vehiculos\n";
         cout << "6 - Proximos Vencimientos\n";
         cout << "7 - Informes\n";
+        cout << "8 - Exportar a CSV\n";
         cout << "-----------------------------\n";
         cout << "0 - Salir\n";
         cout << "Ingrese una opcion: ";
@@ -39,6 +40,7 @@ void menuPrincipal() {
             case 5: menuVehiculos(); break;
             case 6: menuVencimientos(); break;
             case 7: menuInformes(); break;
+            case 8: menuExportarCSV(); break;
             case 0: cout << "Saliendo del programa...\n"; break;
             default: cout << "Opcion invalida.\n"; system("pause"); break;
         }

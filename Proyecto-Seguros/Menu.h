@@ -9,6 +9,7 @@ void menuVehiculos();
 void menuVencimientos();
 void menuInformes();
 void menuCompanias();
+void menuExportarCSV();
 
 // Funciones auxiliares
 void mostrarDinero(float cantidad);

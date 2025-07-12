@@ -31,6 +31,7 @@ public:
     float calcularRecaudacionMensual(int mes, int anio);
     float calcularRecaudacionSemanal(int semana, int anio);
     float calcularRecaudacionPersonalizada(Fecha fechaInicio, Fecha fechaFin);
+    bool exportarCSV(const char* nombreArchivo = "polizas.csv");
 };
 
 #endif // ARCHIVOSPOLIZA_H_INCLUDED 

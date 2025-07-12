@@ -24,6 +24,7 @@ public:
     int contarRegistros();
     bool bajaLogica(int idCliente);
     bool modificarDatosCliente();
+    bool exportarCSV(const char* nombreArchivo = "clientes.csv");
 };
 
 #endif // ARCHIVOSCLIENTES_H_INCLUDED

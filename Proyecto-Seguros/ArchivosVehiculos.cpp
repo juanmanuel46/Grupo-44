@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstring>
 #include <limits>
+#include <fstream>
 
 using namespace std;
 
@@ -242,4 +243,42 @@ int ArchivoVehiculo::contarRegistros() {
     fclose(pVehiculo);
 
     return tam / tamanioRegistro;
+}
+
+bool ArchivoVehiculo::exportarCSV(const char* nombreArchivo) {
+    Vehiculo obj;
+    FILE *pVehiculo;
+    pVehiculo = fopen(nombre, "rb");
+    
+    if (pVehiculo == nullptr) {
+        cout << "No se pudo abrir el archivo de vehiculos." << endl;
+        return false;
+    }
+    
+    ofstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        cout << "No se pudo crear el archivo CSV." << endl;
+        fclose(pVehiculo);
+        return false;
+    }
+    
+    // Escribir encabezados
+    archivo << "ID_Vehiculo,Marca,Version,Anio,Patente,Activo\n";
+    
+    // Escribir datos
+    while (fread(&obj, tamanioRegistro, 1, pVehiculo) == 1) {
+        if (obj.getActivo()) {
+            archivo << obj.getIdVehiculo() << ","
+                   << obj.getMarca() << ","
+                   << obj.getVersion() << ","
+                   << obj.getAnio() << ","
+                   << obj.getPatente() << ","
+                   << (obj.getActivo() ? "Si" : "No") << "\n";
+        }
+    }
+    
+    fclose(pVehiculo);
+    archivo.close();
+    cout << "Archivo CSV exportado exitosamente: " << nombreArchivo << endl;
+    return true;
 }

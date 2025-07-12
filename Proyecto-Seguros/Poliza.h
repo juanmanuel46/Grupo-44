@@ -14,8 +14,6 @@ private:
     char _patente[10];
     Fecha _fechaInicio;
     Fecha _fechaVencimiento;
-    char _nombre[10];
-    char _apellido[10];
     char _detalleCobertura[50];
     float _importeMensual;
     bool _activo;
@@ -30,8 +28,6 @@ public:
     const char* getPatente() ;
     const Fecha& getFechaInicio() ;
     const Fecha& getFechaVencimiento() ;
-    const char* getNombre() ;
-    const char* getApellido() ;
     const char* getDetalleCobertura() ;
     float getImporteMensual() ;
     bool isActivo() ;
@@ -42,8 +38,6 @@ public:
     void setPatente(const char* patente);
     void setFechaInicio(const Fecha& fecha);
     void setFechaVencimiento(const Fecha& fecha);
-    void setNombre(const char* nombre);
-    void setApellido(const char* apellido);
     void setDetalleCobertura(const char* detalle);
     void setImporteMensual(float importe);
     void setActivo(bool estado);

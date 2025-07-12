@@ -7,6 +7,7 @@
 #include <cstring>
 #include <ctime>
 #include <limits>
+#include <fstream>
 
 using namespace std;
 
@@ -51,7 +52,7 @@ int ArchivoPoliza::agregarRegistro() {
     ArchivoCliente archivoCliente("clientes.dat");
     int clienteExiste = archivoCliente.buscarClienteDni(nuevaPoliza.getDni());
     if (clienteExiste < 0) {
-        cout << "Error: el cliente con DNI " << nuevaPoliza.getDni() << " no existe." << endl;
+        cout << "Error: el cliente con DNI " << nuevaPoliza.getDni() << " no existe. Favor de crear el cliente antes de crear la poliza." << endl;
         system("pause");
         return -3;
     }
@@ -250,6 +251,7 @@ int ArchivoPoliza::contarRegistros() {
 
 bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
     Poliza obj;
+    Cliente cli;
     FILE *pPoliza;
     pPoliza = fopen(nombre, "rb");
 
@@ -296,7 +298,7 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
                 }
 
                 cout << "Poliza: " << obj.getNumeroPoliza()
-                     << " | Cliente: " << obj.getNombre() << " " << obj.getApellido()
+                     << " | Cliente: " << cli.getNombre() << " " << cli.getApellido()
                      << " | Patente: " << obj.getPatente()
                      << " | Vencimiento: " << fechaVenc.toString()
                      << " | Estado: ";
@@ -349,9 +351,12 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
 
     cout << "POLIZAS DISPONIBLES:" << endl;
     Poliza pol;
+    Cliente cli;
+    ArchivoCliente archivoCliente("clientes.dat");
+
     while (fread(&pol, tamanioRegistro, 1, pPoliza) == 1) {
         if (pol.isActivo()) {
-            cout << "Poliza ID: " << pol.getNumeroPoliza() << " - Cliente: " << pol.getNombre() << " " << pol.getApellido() << endl;
+            cout << "Poliza ID: " << pol.getNumeroPoliza() << " - Cliente: " << cli.getNombre() << " " << cli.getApellido() << endl;
         }
     }
 
@@ -404,7 +409,7 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
                     hayResultados = true;
                 }
                 cout << pol.getNumeroPoliza() << " | "
-                     << pol.getNombre() << " " << pol.getApellido() << " | "
+                     << cli.getNombre() << " " << cli.getApellido() << " | "
                      << pol.getPatente() << " | "
                      << cantSiniestros << " | $"
                      << (long long)montoTotal << endl;
@@ -545,4 +550,46 @@ float ArchivoPoliza::calcularRecaudacionPersonalizada(Fecha fechaInicio, Fecha f
 
     fclose(pPoliza);
     return recaudacion;
+}
+
+bool ArchivoPoliza::exportarCSV(const char* nombreArchivo) {
+    Poliza obj;
+    FILE *pPoliza;
+    pPoliza = fopen(nombre, "rb");
+
+    if (pPoliza == nullptr) {
+        cout << "No se pudo abrir el archivo de polizas." << endl;
+        return false;
+    }
+
+    ofstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        cout << "No se pudo crear el archivo CSV." << endl;
+        fclose(pPoliza);
+        return false;
+    }
+
+    // Escribir encabezados
+    archivo << "Numero_Poliza,DNI,Patente,Fecha_Inicio,Fecha_Vencimiento,Detalle_Cobertura,Importe_Mensual,Activo\n";
+
+    // Escribir datos
+    while (fread(&obj, tamanioRegistro, 1, pPoliza) == 1) {
+        if (obj.isActivo()) {
+            Fecha inicio = obj.getFechaInicio();
+            Fecha vencimiento = obj.getFechaVencimiento();
+            archivo << obj.getNumeroPoliza() << ","
+                   << obj.getDni() << ","
+                   << obj.getPatente() << ","
+                   << inicio.getDia() << "/" << inicio.getMes() << "/" << inicio.getAnio() << ","
+                   << vencimiento.getDia() << "/" << vencimiento.getMes() << "/" << vencimiento.getAnio() << ","
+                   << obj.getDetalleCobertura() << ","
+                   << obj.getImporteMensual() << ","
+                   << (obj.isActivo() ? "Si" : "No") << "\n";
+        }
+    }
+
+    fclose(pPoliza);
+    archivo.close();
+    cout << "Archivo CSV exportado exitosamente: " << nombreArchivo << endl;
+    return true;
 }
