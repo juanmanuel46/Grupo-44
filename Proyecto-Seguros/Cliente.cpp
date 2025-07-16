@@ -56,6 +56,7 @@ const char* Cliente::getTelefono()  {
     return telefono;
 }
 
+
 // Setters
 
 void Cliente::setIdCliente(int valor) {

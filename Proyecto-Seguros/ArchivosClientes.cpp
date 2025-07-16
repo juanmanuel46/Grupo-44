@@ -134,6 +134,28 @@ Cliente ArchivoCliente::leerRegistro(int pos) {
     return obj;
 }
 
+Cliente ArchivoCliente::leerRegistro() {
+    Cliente obj;
+    FILE *pCliente;
+    pCliente = fopen(nombre, "rb");
+
+    // Inicialización por si falla la apertura o lectura
+    obj.setIdCliente(-1);
+
+    if (pCliente == nullptr) {
+        return obj;
+    }
+
+    fseek(pCliente, -1* tamanioRegistro, SEEK_END);
+    fread(&obj, tamanioRegistro, 1, pCliente);
+    fclose(pCliente);
+
+    return obj;
+}
+
+
+
+
 bool ArchivoCliente::modificarRegistro(Cliente reg, int pos) {
     FILE *pCliente;
     pCliente = fopen(nombre, "rb+"); // rb+ para leer y escribir
@@ -147,6 +169,21 @@ bool ArchivoCliente::modificarRegistro(Cliente reg, int pos) {
 
     return escribio == 1;
 }
+
+bool ArchivoCliente::modificarRegistro(Cliente reg) {
+    FILE *pCliente;
+    pCliente = fopen(nombre, "rb+"); // rb+ para leer y escribir
+    if (pCliente == nullptr) {
+        return false;
+    }
+
+    fseek(pCliente, -1* tamanioRegistro, SEEK_END);
+    int escribio = fwrite(&reg, tamanioRegistro, 1, pCliente);
+    fclose(pCliente);
+
+    return escribio == 1;
+}
+
 
 bool ArchivoCliente::modificarDatosCliente() {
     int idBuscado;
@@ -250,22 +287,22 @@ bool ArchivoCliente::exportarCSV(const char* nombreArchivo) {
     Cliente obj;
     FILE *pCliente;
     pCliente = fopen(nombre, "rb");
-    
+
     if (pCliente == nullptr) {
         cout << "No se pudo abrir el archivo de clientes." << endl;
         return false;
     }
-    
+
     ofstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
         cout << "No se pudo crear el archivo CSV." << endl;
         fclose(pCliente);
         return false;
     }
-    
+
     // Escribir encabezados
     archivo << "ID,Nombre,Apellido,DNI,Fecha_Nacimiento,Activo,Domicilio,Email,Telefono\n";
-    
+
     // Escribir datos
     while (fread(&obj, tamanioRegistro, 1, pCliente) == 1) {
         if (obj.getActivo()) {
@@ -281,7 +318,7 @@ bool ArchivoCliente::exportarCSV(const char* nombreArchivo) {
                    << obj.getTelefono() << "\n";
         }
     }
-    
+
     fclose(pCliente);
     archivo.close();
     cout << "Archivo CSV exportado exitosamente: " << nombreArchivo << endl;

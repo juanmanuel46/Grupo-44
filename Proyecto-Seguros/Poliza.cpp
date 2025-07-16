@@ -14,6 +14,7 @@ Poliza::Poliza() {
     strcpy(_detalleCobertura, "");
     _importeMensual = 0.0f;
     _activo = true;
+
 }
 
 // Getters corregidos
@@ -25,6 +26,7 @@ const Fecha& Poliza::getFechaVencimiento()  { return _fechaVencimiento; }
 const char* Poliza::getDetalleCobertura()  { return _detalleCobertura; }
 float Poliza::getImporteMensual()  { return _importeMensual; }
 bool Poliza::isActivo()  { return _activo; }  // Corregido: _activo
+
 
 // Setters corregidos
 void Poliza::setNumeroPoliza(int numeroPoliza) { _numeroPoliza = numeroPoliza; }

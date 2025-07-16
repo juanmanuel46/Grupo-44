@@ -54,8 +54,21 @@ int ArchivoPoliza::agregarRegistro() {
     int clienteExiste = archivoCliente.buscarClienteDni(nuevaPoliza.getDni());
     if (clienteExiste < 0) {
         cout << "Error: el cliente con DNI " << nuevaPoliza.getDni() << " no existe. Favor de crear el cliente antes de crear la poliza." << endl;
+        cout << "Desea crear el cliente (S/N): " << endl;
+        char respuesta;
+        cin >> respuesta; // hacer lo de toupper
+        if(respuesta == 'S'){ // lo que hice fue sobrecargar la funcion de leerRegistro y de modificarRegistro de archivoCliente.
+                                // solo lo hice con cliente pero con la carga de patente seria lo mismo.
+
+           archivoCliente.agregarRegistro();
+           Cliente cli;
+           cli = archivoCliente.leerRegistro();
+           cli.setDni(nuevaPoliza.getDni());
+           archivoCliente.modificarRegistro(cli);
+        }else if(respuesta == 'N'){
         system("pause");
         return -3;
+        }
     }
 
     nuevaPoliza.cargarPatente();
@@ -64,8 +77,16 @@ int ArchivoPoliza::agregarRegistro() {
     int patenteExiste = archivoVehiculo.buscarPatente(nuevaPoliza.getPatente());
     if (patenteExiste < 0) {
         cout << "Error: el vehiculo con patente " << nuevaPoliza.getPatente() << " no existe." << endl;
+        cout << "Desea cargar vehiculo nuevo? (S/N): " << endl;
+        char respuesta;
+        cin >> respuesta;
+        if(respuesta == 'S'){
+
+           archivoVehiculo.agregarRegistro();
+        }else if(respuesta == 'N'){
         system("pause");
         return -4;
+        }
     }
 
     nuevaPoliza.cargarDatos();

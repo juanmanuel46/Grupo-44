@@ -32,6 +32,8 @@ public:
     float getImporteMensual() ;
     bool isActivo() ;
 
+
+
     // Setters
     void setNumeroPoliza(int numeroPoliza);
     void setDni(int dni);

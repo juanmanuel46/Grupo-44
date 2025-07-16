@@ -393,7 +393,7 @@
 	<limits>
 	<cstring>
 
-1752623628 source:c:\users\cferl\documents\github\grupo-44\proyecto-seguros\archivosclientes.cpp
+1752643797 source:c:\users\cferl\documents\github\grupo-44\proyecto-seguros\archivosclientes.cpp
 	"ArchivosClientes.h"
 	"Cliente.h"
 	<iostream>
@@ -401,11 +401,11 @@
 	<limits>
 	<fstream>
 
-1752623628 c:\users\cferl\documents\github\grupo-44\proyecto-seguros\archivosclientes.h
+1752643883 c:\users\cferl\documents\github\grupo-44\proyecto-seguros\archivosclientes.h
 	"Cliente.h"
 	<string.h>
 
-1752623628 c:\users\cferl\documents\github\grupo-44\proyecto-seguros\cliente.h
+1752640918 c:\users\cferl\documents\github\grupo-44\proyecto-seguros\cliente.h
 	"Fecha.h"
 
 1752623628 c:\users\cferl\documents\github\grupo-44\proyecto-seguros\fecha.h
@@ -424,7 +424,7 @@
 
 1752623628 c:\users\cferl\documents\github\grupo-44\proyecto-seguros\compania.h
 
-1752638343 source:c:\users\cferl\documents\github\grupo-44\proyecto-seguros\archivospoliza.cpp
+1752640918 source:c:\users\cferl\documents\github\grupo-44\proyecto-seguros\archivospoliza.cpp
 	"ArchivosPoliza.h"
 	"Poliza.h"
 	"ArchivosSiniestro.h"
@@ -435,12 +435,13 @@
 	<ctime>
 	<limits>
 	<fstream>
+	<iomanip>
 
 1752623628 c:\users\cferl\documents\github\grupo-44\proyecto-seguros\archivospoliza.h
 	"Poliza.h"
 	<string.h>
 
-1752623628 c:\users\cferl\documents\github\grupo-44\proyecto-seguros\poliza.h
+1752640918 c:\users\cferl\documents\github\grupo-44\proyecto-seguros\poliza.h
 	<cstring>
 	"Fecha.h"
 
@@ -474,7 +475,7 @@
 	<limits>
 	<fstream>
 
-1752623628 source:c:\users\cferl\documents\github\grupo-44\proyecto-seguros\cliente.cpp
+1752640918 source:c:\users\cferl\documents\github\grupo-44\proyecto-seguros\cliente.cpp
 	"Cliente.h"
 	"Fecha.h"
 	<iostream>
@@ -514,7 +515,7 @@
 	"ArchivosPoliza.h"
 	"Fecha.h"
 
-1752623628 source:c:\users\cferl\documents\github\grupo-44\proyecto-seguros\poliza.cpp
+1752640927 source:c:\users\cferl\documents\github\grupo-44\proyecto-seguros\poliza.cpp
 	"Poliza.h"
 	<iostream>
 	<limits>
