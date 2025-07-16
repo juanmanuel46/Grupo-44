@@ -8,6 +8,7 @@
 #include <ctime>
 #include <limits>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -283,7 +284,9 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
     while (fread(&obj, tamanioRegistro, 1, pPoliza) == 1) {
         if (obj.isActivo()) {
             Fecha fechaVenc = obj.getFechaVencimiento();
-
+            ArchivoCliente archivoCliente("clientes.dat");
+            int posCli = archivoCliente.buscarClienteDni(obj.getDni());
+            cli = archivoCliente.leerRegistro(posCli);
             // Calcular días hasta vencimiento
             // Convertir fechas a días juliano aproximado para comparar
             int diasVencimiento = fechaVenc.getDia() + fechaVenc.getMes() * 30 + fechaVenc.getAnio() * 365;
@@ -356,6 +359,8 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
 
     while (fread(&pol, tamanioRegistro, 1, pPoliza) == 1) {
         if (pol.isActivo()) {
+            int posCli = archivoCliente.buscarClienteDni(pol.getDni());
+            cli= archivoCliente.leerRegistro(posCli);
             cout << "Poliza ID: " << pol.getNumeroPoliza() << " - Cliente: " << cli.getNombre() << " " << cli.getApellido() << endl;
         }
     }
@@ -404,15 +409,23 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
             if (tieneSiniestros) {
                 if (!hayResultados) {
                     cout << "\nRESULTADOS FINALES:" << endl;
-                    cout << "Poliza | Cliente | Patente | Cant.Siniestros | Monto Total" << endl;
-                    cout << "--------------------------------------------------------" << endl;
+                    cout << left << setw(10) << "Poliza"
+                    << "| " << setw(20) << "Cliente"
+                    << "| " << setw(10) << "Patente"
+                    << "| " << setw(17) << "Cant.Siniestros"
+                    << "| " << "Monto Total" << endl;
+
+                        cout << "-------------------------------------------------------------------------------" << endl;
                     hayResultados = true;
                 }
-                cout << pol.getNumeroPoliza() << " | "
-                     << cli.getNombre() << " " << cli.getApellido() << " | "
-                     << pol.getPatente() << " | "
-                     << cantSiniestros << " | $"
-                     << (long long)montoTotal << endl;
+                    string nombreCompleto = string(cli.getNombre()) + " " + string(cli.getApellido()); // convertir los const char* a std::string antes de concatenar
+
+                    cout << left << setw(10) << pol.getNumeroPoliza()
+                    << "| " << setw(20) << nombreCompleto
+                    << "| " << setw(10) << pol.getPatente()
+                    << "| " << right << setw(17) << cantSiniestros
+                    << "| $" << setw(12) << right << (long long)montoTotal
+                    << endl;
             }
         }
     }
@@ -424,7 +437,7 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
         cout << "Esto significa que ninguna poliza tiene siniestros con IDs coincidentes." << endl;
     }
 
-    cout << "========================================" << endl;
+    cout << "================================================================================" << endl;
     system("pause");
     return true;
 }
