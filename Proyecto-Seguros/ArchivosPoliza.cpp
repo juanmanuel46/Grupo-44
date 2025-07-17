@@ -81,8 +81,8 @@ int ArchivoPoliza::agregarRegistro() {
         char respuesta;
         cin >> respuesta;
         if(respuesta == 'S'){
+        archivoVehiculo.agregarRegistro(); // esta creo que es mejor forma que la de arriba con cliente, aca directamente cargamos y no hay que hacer ninguna sobrecarga
 
-           archivoVehiculo.agregarRegistro();
         }else if(respuesta == 'N'){
         system("pause");
         return -4;
