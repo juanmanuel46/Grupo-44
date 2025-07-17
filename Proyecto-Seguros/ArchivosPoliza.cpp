@@ -9,6 +9,7 @@
 #include <limits>
 #include <fstream>
 #include <iomanip>
+#include <cctype>
 
 using namespace std;
 
@@ -56,15 +57,15 @@ int ArchivoPoliza::agregarRegistro() {
         cout << "Error: el cliente con DNI " << nuevaPoliza.getDni() << " no existe. Favor de crear el cliente antes de crear la poliza." << endl;
         cout << "Desea crear el cliente (S/N): " << endl;
         char respuesta;
-        cin >> respuesta; // hacer lo de toupper
-        if(respuesta == 'S'){ // lo que hice fue sobrecargar la funcion de leerRegistro y de modificarRegistro de archivoCliente.
-                                // solo lo hice con cliente pero con la carga de patente seria lo mismo.
-
-           archivoCliente.agregarRegistro();
-           Cliente cli;
-           cli = archivoCliente.leerRegistro();
-           cli.setDni(nuevaPoliza.getDni());
-           archivoCliente.modificarRegistro(cli);
+        cin >> respuesta;
+        respuesta = toupper(respuesta);
+        if(respuesta == 'S'){
+           int resultadoCliente = archivoCliente.agregarRegistro(nuevaPoliza.getDni());
+           if(resultadoCliente == -2) {
+               cout << "No se pudo crear el cliente. Operacion de agregar poliza cancelada." << endl;
+               system("pause");
+               return -3;
+           }
         }else if(respuesta == 'N'){
         system("pause");
         return -3;
@@ -80,9 +81,9 @@ int ArchivoPoliza::agregarRegistro() {
         cout << "Desea cargar vehiculo nuevo? (S/N): " << endl;
         char respuesta;
         cin >> respuesta;
+        respuesta = toupper(respuesta);
         if(respuesta == 'S'){
-        archivoVehiculo.agregarRegistro(); // esta creo que es mejor forma que la de arriba con cliente, aca directamente cargamos y no hay que hacer ninguna sobrecarga
-
+        archivoVehiculo.agregarRegistro();
         }else if(respuesta == 'N'){
         system("pause");
         return -4;

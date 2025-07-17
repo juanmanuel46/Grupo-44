@@ -168,7 +168,7 @@
 	<cstring>
 	<limits>
 
-1752342244 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivosclientes.cpp
+1752789091 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivosclientes.cpp
 	"ArchivosClientes.h"
 	"Cliente.h"
 	<iostream>
@@ -176,11 +176,11 @@
 	<limits>
 	<fstream>
 
-1752342196 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivosclientes.h
+1752788173 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivosclientes.h
 	"Cliente.h"
 	<string.h>
 
-1752184259 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\cliente.h
+1752788020 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\cliente.h
 	"Fecha.h"
 
 1752342259 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivoscompania.cpp
@@ -196,7 +196,7 @@
 
 1751325612 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\compania.h
 
-1752342836 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivospoliza.cpp
+1752789234 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivospoliza.cpp
 	"ArchivosPoliza.h"
 	"Poliza.h"
 	"ArchivosSiniestro.h"
@@ -207,12 +207,14 @@
 	<ctime>
 	<limits>
 	<fstream>
+	<iomanip>
+	<cctype>
 
 1752342203 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivospoliza.h
 	"Poliza.h"
 	<string.h>
 
-1752343119 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\poliza.h
+1752786839 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\poliza.h
 	<cstring>
 	"Fecha.h"
 
@@ -234,7 +236,7 @@
 	<limits>
 	<fstream>
 
-1752342298 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivosvehiculos.cpp
+1752789622 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivosvehiculos.cpp
 	"ArchivosVehiculos.h"
 	"Vehiculo.h"
 	<iostream>
@@ -242,14 +244,14 @@
 	<limits>
 	<fstream>
 
-1752342212 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivosvehiculos.h
+1752789568 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\archivosvehiculos.h
 	"Vehiculo.h"
 	<string.h>
 
-1751284754 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\vehiculo.h
+1752789537 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\vehiculo.h
 	<cstring>
 
-1752184259 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\cliente.cpp
+1752788033 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\cliente.cpp
 	"Cliente.h"
 	"Fecha.h"
 	<iostream>
@@ -283,7 +285,7 @@
 
 1752342450 c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\menu.h
 
-1752185457 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\poliza.cpp
+1752786839 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\poliza.cpp
 	"Poliza.h"
 	<iostream>
 	<limits>
@@ -301,7 +303,7 @@
 	<limits>
 	"Menu.h"
 
-1751248096 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\vehiculo.cpp
+1752789558 source:c:\users\carme\onedrive\escritorio\programación 2 2025\grupo-44\proyecto-seguros\vehiculo.cpp
 	"Vehiculo.h"
 	<iostream>
 	<fstream>

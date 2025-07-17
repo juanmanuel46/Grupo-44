@@ -45,6 +45,7 @@ public:
     void cargar();
     void cargarId();
     void cargarDatos();
+    void cargarDatosSinDni(); // Nueva función para cargar datos sin pedir DNI
     void buscarCliente(int getDni);
 };
 

@@ -58,13 +58,68 @@ int ArchivoCliente::agregarRegistro() {
     nuevoCliente.cargarId();
 
     int resultado = buscarCliente(nuevoCliente.getIdCliente());
-    if (resultado >= 0) {  // Solo si encontró un registro existente (posición válida >= 0)
+    if (resultado >= 0) {  
         cout << "Error: ya existe un cliente con el ID " << nuevoCliente.getIdCliente() << "." << endl;
         system("pause");
         return -2;
     }
 
+
     nuevoCliente.cargarDatos();
+
+    FILE *pCliente;
+    pCliente = fopen(nombre, "ab");
+    if (pCliente == nullptr) {
+        cout << "No se pudo abrir el archivo para escribir." << endl;
+        return -1;
+    }
+
+    int escribio = fwrite(&nuevoCliente, tamanioRegistro, 1, pCliente);
+    fclose(pCliente);
+
+    if (escribio == 1) {
+        cout << "\nCliente guardado con exito.\n" << endl;
+    }
+    system("pause");
+    return escribio;
+}
+
+int ArchivoCliente::agregarRegistro(int dni) {
+    Cliente nuevoCliente;
+    cout << "--- AGREGAR CLIENTE ---" << endl;
+    cout << "DNI del cliente: " << dni << endl;
+
+    // Bucle para pedir ID hasta que sea único
+    bool idValido = false;
+    while (!idValido) {
+        nuevoCliente.cargarId();
+        
+        int resultado = buscarCliente(nuevoCliente.getIdCliente());
+        if (resultado >= 0) {  
+            cout << "Error: ya existe un cliente con el ID " << nuevoCliente.getIdCliente() << "." << endl;
+            cout << "Desea ingresar un ID diferente? (S/N): " << endl;
+            char respuesta;
+            cin >> respuesta;
+            respuesta = toupper(respuesta);
+
+
+            if(respuesta == 'S'){
+                cout << "Ingrese un nuevo ID para el cliente:" << endl;
+                // El bucle continuará para pedir otro ID
+            } else if(respuesta == 'N'){
+                cout << "Operacion cancelada." << endl;
+                system("pause");
+                return -2;
+            }
+        } else {
+            // ID es único, salir del bucle
+            idValido = true;
+        }
+    }
+
+    // Crear nuevo cliente con ID único
+    nuevoCliente.setDni(dni);
+    nuevoCliente.cargarDatosSinDni();
 
     FILE *pCliente;
     pCliente = fopen(nombre, "ab");

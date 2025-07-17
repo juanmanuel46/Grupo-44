@@ -16,6 +16,7 @@ public:
     }
 
     int agregarRegistro();
+    int agregarRegistro(int dni);
     bool listarRegistros();
     int buscarCliente(int idCliente);
     int buscarClienteDni(int dniCliente);

@@ -83,6 +83,48 @@ int ArchivoVehiculo::agregarRegistro() {
     return escribio;
 }
 
+int ArchivoVehiculo::agregarRegistro(const char* patente) {
+    Vehiculo nuevoVehiculo;
+    cout << "--- AGREGAR VEHICULO ---" << endl;
+    cout << "Patente del vehiculo: " << patente << endl;
+
+    nuevoVehiculo.cargarId();
+
+    int resultado = buscarVehiculo(nuevoVehiculo.getIdVehiculo());
+    if (resultado >= 0) {
+        cout << "Error: ya existe un vehiculo con el ID " << nuevoVehiculo.getIdVehiculo() << "." << endl;
+        cout << "Desea modificarlo? (S/N): " << endl;
+        char respuesta;
+        cin >> respuesta;
+        respuesta = toupper(respuesta);
+        if(respuesta == 'S'){
+            nuevoVehiculo = leerRegistro(resultado);
+        }
+        system("pause");
+
+        return -2;
+    }
+
+    nuevoVehiculo.cargarDatosSinPatente();
+
+    FILE *pVehiculo;
+    pVehiculo = fopen(nombre, "ab");
+    if (pVehiculo == nullptr) {
+        cout << "No se pudo abrir el archivo para escribir." << endl;
+        return -1;
+    }
+
+    int escribio = fwrite(&nuevoVehiculo, tamanioRegistro, 1, pVehiculo);
+    fclose(pVehiculo);
+
+    if (escribio == 1) {
+        cout << "\nVehiculo guardado con exito.\n" << endl;
+    }
+
+    system("pause");
+    return escribio;
+}
+
 bool ArchivoVehiculo::listarRegistros() {
     Vehiculo obj;
     FILE *pVehiculo;
