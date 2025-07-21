@@ -89,6 +89,17 @@ void Vehiculo::cargarDatos() {
     activo = true;
 }
 
+void Vehiculo::cargarDatosSinPatente() {
+    cout << "Ingrese marca: ";
+    cin.getline(marca, 30);
+    cout << "Ingrese version: ";
+    cin.getline(version, 30);
+    cout << "Ingrese anio: ";
+    cin >> anio;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    activo = true;
+}
+
 void Vehiculo::cargar() {
     cargarId();
     cargarDatos();

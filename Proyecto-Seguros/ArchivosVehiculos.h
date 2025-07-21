@@ -16,6 +16,7 @@ public:
     }
 
     int agregarRegistro();
+    int agregarRegistro(const char* patente);
     bool listarRegistros();
     int buscarVehiculo(int idVehiculo);
     int buscarPatente(const char* patente);

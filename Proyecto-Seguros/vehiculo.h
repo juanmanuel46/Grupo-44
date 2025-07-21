@@ -17,6 +17,7 @@ public:
     void cargar();
     void cargarId();
     void cargarDatos();
+    void cargarDatosSinPatente();
     void mostrar();
 
     int getIdVehiculo();

@@ -58,13 +58,68 @@ int ArchivoCliente::agregarRegistro() {
     nuevoCliente.cargarId();
 
     int resultado = buscarCliente(nuevoCliente.getIdCliente());
-    if (resultado >= 0) {  // Solo si encontró un registro existente (posición válida >= 0)
+    if (resultado >= 0) {
         cout << "Error: ya existe un cliente con el ID " << nuevoCliente.getIdCliente() << "." << endl;
         system("pause");
         return -2;
     }
 
+
     nuevoCliente.cargarDatos();
+
+    FILE *pCliente;
+    pCliente = fopen(nombre, "ab");
+    if (pCliente == nullptr) {
+        cout << "No se pudo abrir el archivo para escribir." << endl;
+        return -1;
+    }
+
+    int escribio = fwrite(&nuevoCliente, tamanioRegistro, 1, pCliente);
+    fclose(pCliente);
+
+    if (escribio == 1) {
+        cout << "\nCliente guardado con exito.\n" << endl;
+    }
+    system("pause");
+    return escribio;
+}
+
+int ArchivoCliente::agregarRegistro(int dni) {
+    Cliente nuevoCliente;
+    cout << "--- AGREGAR CLIENTE ---" << endl;
+    cout << "DNI del cliente: " << dni << endl;
+
+    // Bucle para pedir ID hasta que sea único
+    bool idValido = false;
+    while (!idValido) {
+        nuevoCliente.cargarId();
+
+        int resultado = buscarCliente(nuevoCliente.getIdCliente());
+        if (resultado >= 0) {
+            cout << "Error: ya existe un cliente con el ID " << nuevoCliente.getIdCliente() << "." << endl;
+            cout << "Desea ingresar un ID diferente? (S/N): " << endl;
+            char respuesta;
+            cin >> respuesta;
+            respuesta = toupper(respuesta);
+
+
+            if(respuesta == 'S'){
+                cout << "Ingrese un nuevo ID para el cliente:" << endl;
+                // El bucle continuará para pedir otro ID
+            } else if(respuesta == 'N'){
+                cout << "Operacion cancelada." << endl;
+                system("pause");
+                return -2;
+            }
+        } else {
+            // ID es único, salir del bucle
+            idValido = true;
+        }
+    }
+
+    // Crear nuevo cliente con ID único
+    nuevoCliente.setDni(dni);
+    nuevoCliente.cargarDatosSinDni();
 
     FILE *pCliente;
     pCliente = fopen(nombre, "ab");
@@ -134,6 +189,28 @@ Cliente ArchivoCliente::leerRegistro(int pos) {
     return obj;
 }
 
+Cliente ArchivoCliente::leerRegistro() {
+    Cliente obj;
+    FILE *pCliente;
+    pCliente = fopen(nombre, "rb");
+
+    // Inicialización por si falla la apertura o lectura
+    obj.setIdCliente(-1);
+
+    if (pCliente == nullptr) {
+        return obj;
+    }
+
+    fseek(pCliente, -1* tamanioRegistro, SEEK_END);
+    fread(&obj, tamanioRegistro, 1, pCliente);
+    fclose(pCliente);
+
+    return obj;
+}
+
+
+
+
 bool ArchivoCliente::modificarRegistro(Cliente reg, int pos) {
     FILE *pCliente;
     pCliente = fopen(nombre, "rb+"); // rb+ para leer y escribir
@@ -147,6 +224,21 @@ bool ArchivoCliente::modificarRegistro(Cliente reg, int pos) {
 
     return escribio == 1;
 }
+
+bool ArchivoCliente::modificarRegistro(Cliente reg) {
+    FILE *pCliente;
+    pCliente = fopen(nombre, "rb+"); // rb+ para leer y escribir
+    if (pCliente == nullptr) {
+        return false;
+    }
+
+    fseek(pCliente, -1* tamanioRegistro, SEEK_END);
+    int escribio = fwrite(&reg, tamanioRegistro, 1, pCliente);
+    fclose(pCliente);
+
+    return escribio == 1;
+}
+
 
 bool ArchivoCliente::modificarDatosCliente() {
     int idBuscado;
@@ -181,7 +273,7 @@ bool ArchivoCliente::modificarDatosCliente() {
     cli.mostrar();
     cout << "\nIngrese los NUEVOS datos:" << endl;
 
-    cli.cargarDatos(); // Asumo que carga todos los datos excepto el ID y estado.
+    cli.cargarDatosModificacion();
 
     if (modificarRegistro(cli, pos)) {
         cout << "\nCliente modificado exitosamente." << endl;
@@ -250,22 +342,22 @@ bool ArchivoCliente::exportarCSV(const char* nombreArchivo) {
     Cliente obj;
     FILE *pCliente;
     pCliente = fopen(nombre, "rb");
-    
+
     if (pCliente == nullptr) {
         cout << "No se pudo abrir el archivo de clientes." << endl;
         return false;
     }
-    
+
     ofstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
         cout << "No se pudo crear el archivo CSV." << endl;
         fclose(pCliente);
         return false;
     }
-    
+
     // Escribir encabezados
     archivo << "ID,Nombre,Apellido,DNI,Fecha_Nacimiento,Activo,Domicilio,Email,Telefono\n";
-    
+
     // Escribir datos
     while (fread(&obj, tamanioRegistro, 1, pCliente) == 1) {
         if (obj.getActivo()) {
@@ -281,7 +373,7 @@ bool ArchivoCliente::exportarCSV(const char* nombreArchivo) {
                    << obj.getTelefono() << "\n";
         }
     }
-    
+
     fclose(pCliente);
     archivo.close();
     cout << "Archivo CSV exportado exitosamente: " << nombreArchivo << endl;

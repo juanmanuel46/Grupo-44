@@ -16,11 +16,14 @@ public:
     }
 
     int agregarRegistro();
+    int agregarRegistro(int dni);
     bool listarRegistros();
     int buscarCliente(int idCliente);
     int buscarClienteDni(int dniCliente);
     Cliente leerRegistro(int pos);
+    Cliente leerRegistro();
     bool modificarRegistro(Cliente reg, int pos);
+    bool modificarRegistro(Cliente reg);
     int contarRegistros();
     bool bajaLogica(int idCliente);
     bool modificarDatosCliente();
