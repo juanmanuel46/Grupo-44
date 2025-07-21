@@ -9,6 +9,7 @@ Poliza::Poliza() {
     _numeroPoliza = 0;
     _dni = 0;
     strcpy(_patente, "");
+    strcpy(_compania, "");
     _fechaInicio = Fecha();
     _fechaVencimiento = Fecha();
     strcpy(_detalleCobertura, "");
@@ -21,6 +22,7 @@ Poliza::Poliza() {
 int Poliza::getNumeroPoliza()  { return _numeroPoliza; }
 int Poliza::getDni()  { return _dni; }
 const char* Poliza::getPatente()  { return _patente; }
+const char* Poliza::getCompania()  { return _compania; }
 const Fecha& Poliza::getFechaInicio()  { return _fechaInicio; }
 const Fecha& Poliza::getFechaVencimiento()  { return _fechaVencimiento; }
 const char* Poliza::getDetalleCobertura()  { return _detalleCobertura; }
@@ -34,6 +36,10 @@ void Poliza::setDni(int dni) { _dni = dni; }
 void Poliza::setPatente(const char* patente) {
     strncpy(_patente, patente, 9);
     _patente[9] = '\0';
+}
+void Poliza::setCompania(const char* compania) {
+    strncpy(_compania, compania, 29);
+    _compania[29] = '\0';
 }
 void Poliza::setFechaInicio(const Fecha& fecha) { _fechaInicio = fecha; }
 void Poliza::setFechaVencimiento(const Fecha& fecha) { _fechaVencimiento = fecha; }
@@ -53,6 +59,7 @@ void Poliza::mostrar()  {
     cout << "Nro de poliza: " << _numeroPoliza << endl;
     cout << "DNI: " << _dni << endl;
     cout << "Patente: " << _patente << endl;
+    cout << "Compania: " << _compania << endl;
     cout << "Fecha de inicio: " << _fechaInicio.toString() << endl;
     cout << "Fecha de vencimiento: " << _fechaVencimiento.toString() << endl;
     cout << "Detalle de cobertura: " << _detalleCobertura << endl;
@@ -81,6 +88,12 @@ void Poliza::cargarPatente(){
     cin.getline(_patente, 10);
 }
 
+void Poliza::cargarCompania(){
+
+    cout << "Ingrese nombre de la compania: ";
+    cin.getline(_compania, 30);
+}
+
 void Poliza::cargarDatos(){
 
     cout << "Ingrese detalle de cobertura: ";
@@ -105,5 +118,6 @@ void Poliza::cargar() {
     cargarId();
     cargarDNI();
     cargarPatente();
+    cargarCompania();
     cargarDatos();
 }

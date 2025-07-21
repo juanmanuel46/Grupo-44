@@ -536,3 +536,145 @@
 	<cstring>
 	<limits>
 
+1753064090 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivosclientes.cpp
+	"ArchivosClientes.h"
+	"Cliente.h"
+	<iostream>
+	<cstring>
+	<limits>
+	<fstream>
+
+1753042452 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivosclientes.h
+	"Cliente.h"
+	<string.h>
+
+1753043537 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\cliente.h
+	"Fecha.h"
+
+1752622193 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\fecha.h
+	<string>
+
+1752622193 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivoscompania.cpp
+	"ArchivosCompania.h"
+	"Compania.h"
+	<iostream>
+	<cstring>
+	<fstream>
+
+1752622193 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivoscompania.h
+	"Compania.h"
+	<string.h>
+
+1752622193 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\compania.h
+
+1753064864 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivossiniestro.cpp
+	"ArchivosSiniestro.h"
+	"siniestro.h"
+	<iostream>
+	<cstring>
+	<limits>
+	<fstream>
+
+1753042450 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivossiniestro.h
+	"siniestro.h"
+	<string.h>
+
+1753067574 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\siniestro.h
+	<string>
+
+1753042452 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivosvehiculos.cpp
+	"ArchivosVehiculos.h"
+	"Vehiculo.h"
+	<iostream>
+	<cstring>
+	<limits>
+	<fstream>
+
+1753042452 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivosvehiculos.h
+	"Vehiculo.h"
+	<string.h>
+
+1753042452 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\vehiculo.h
+	<cstring>
+
+1753064090 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\cliente.cpp
+	"Cliente.h"
+	"Fecha.h"
+	<iostream>
+	<cstring>
+	<limits>
+
+1752622193 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\compania.cpp
+	"Compania.h"
+	<cstring>
+	<iostream>
+	<limits>
+
+1752622193 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\fecha.cpp
+	<iostream>
+	<string>
+	<limits>
+	"Fecha.h"
+
+1752622193 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\main.cpp
+	<iostream>
+	<cstdlib>
+	<limits>
+	"Menu.h"
+
+1752622193 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\menu.h
+
+1752622193 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\menu.cpp
+	<iostream>
+	<cstdlib>
+	<limits>
+	<cctype>
+	"Menu.h"
+	"ArchivosClientes.h"
+	"ArchivosVehiculos.h"
+	"ArchivosSiniestro.h"
+	"ArchivosCompania.h"
+	"ArchivosPoliza.h"
+	"Fecha.h"
+
+1752622193 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivospoliza.h
+	"Poliza.h"
+	<string.h>
+
+1753066168 c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\poliza.h
+	<cstring>
+	"Fecha.h"
+
+1753066214 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\poliza.cpp
+	"Poliza.h"
+	<iostream>
+	<limits>
+	<cstring>
+
+1753064858 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\siniestro.cpp
+	"siniestro.h"
+	<iostream>
+	<cstring>
+	<limits>
+
+1753042452 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\vehiculo.cpp
+	"Vehiculo.h"
+	<iostream>
+	<fstream>
+	<cstring>
+	<limits>
+
+1753065197 source:c:\users\carme\onedrive\escritorio\grupo-44\proyecto-seguros\archivospoliza.cpp
+	"ArchivosPoliza.h"
+	"Poliza.h"
+	"ArchivosSiniestro.h"
+	"ArchivosClientes.h"
+	"ArchivosVehiculos.h"
+	<iostream>
+	<cstring>
+	<ctime>
+	<limits>
+	<fstream>
+	<iomanip>
+	<cctype>
+

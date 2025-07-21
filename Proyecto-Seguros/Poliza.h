@@ -12,6 +12,7 @@ private:
     int _numeroPoliza;
     int _dni;
     char _patente[10];
+    char _compania[30];
     Fecha _fechaInicio;
     Fecha _fechaVencimiento;
     char _detalleCobertura[50];
@@ -26,6 +27,7 @@ public:
     int getNumeroPoliza() ;
     int getDni() ;
     const char* getPatente() ;
+    const char* getCompania() ;
     const Fecha& getFechaInicio() ;
     const Fecha& getFechaVencimiento() ;
     const char* getDetalleCobertura() ;
@@ -38,6 +40,7 @@ public:
     void setNumeroPoliza(int numeroPoliza);
     void setDni(int dni);
     void setPatente(const char* patente);
+    void setCompania(const char* compania);
     void setFechaInicio(const Fecha& fecha);
     void setFechaVencimiento(const Fecha& fecha);
     void setDetalleCobertura(const char* detalle);
@@ -50,6 +53,7 @@ public:
     void cargarId();
     void cargarDNI();
     void cargarPatente();
+    void cargarCompania();
     void cargarDatos();
     void mostrar() ;
 

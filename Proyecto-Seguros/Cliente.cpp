@@ -169,6 +169,30 @@ void Cliente::cargarDatosSinDni() {
     activo = true;
 }
 
+void Cliente::cargarDatosModificacion() {
+    cout << "Nombre: ";
+    cin.getline(nombre, sizeof(nombre));
+
+    cout << "Apellido: ";
+    cin.getline(apellido, sizeof(apellido));
+
+    cout << "DNI: ";
+    cin >> dni;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    cout << "Fecha de nacimiento: " << endl;
+    fechaNacimiento.cargar();
+
+    cout << "Domicilio: ";
+    cin.getline(domicilio, sizeof(domicilio));
+
+    cout << "Email: ";
+    cin.getline(email, sizeof(email));
+
+    cout << "Telefono: ";
+    cin.getline(telefono, sizeof(telefono));
+}
+
 
 void Cliente::cargar() {
     cargarId();

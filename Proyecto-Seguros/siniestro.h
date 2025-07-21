@@ -19,7 +19,7 @@ public:
     void mostrar() ;
 
     int getIdSiniestro() ;
-    const char* getDescSiniestro() ;
+    const char* getDescSiniestro();
     float getMontoReclamo() ;
     int getIDPoliza() ;
     bool getActivo() ;

@@ -58,7 +58,7 @@ int ArchivoCliente::agregarRegistro() {
     nuevoCliente.cargarId();
 
     int resultado = buscarCliente(nuevoCliente.getIdCliente());
-    if (resultado >= 0) {  
+    if (resultado >= 0) {
         cout << "Error: ya existe un cliente con el ID " << nuevoCliente.getIdCliente() << "." << endl;
         system("pause");
         return -2;
@@ -93,9 +93,9 @@ int ArchivoCliente::agregarRegistro(int dni) {
     bool idValido = false;
     while (!idValido) {
         nuevoCliente.cargarId();
-        
+
         int resultado = buscarCliente(nuevoCliente.getIdCliente());
-        if (resultado >= 0) {  
+        if (resultado >= 0) {
             cout << "Error: ya existe un cliente con el ID " << nuevoCliente.getIdCliente() << "." << endl;
             cout << "Desea ingresar un ID diferente? (S/N): " << endl;
             char respuesta;
@@ -273,7 +273,7 @@ bool ArchivoCliente::modificarDatosCliente() {
     cli.mostrar();
     cout << "\nIngrese los NUEVOS datos:" << endl;
 
-    cli.cargarDatos(); // Asumo que carga todos los datos excepto el ID y estado.
+    cli.cargarDatosModificacion();
 
     if (modificarRegistro(cli, pos)) {
         cout << "\nCliente modificado exitosamente." << endl;

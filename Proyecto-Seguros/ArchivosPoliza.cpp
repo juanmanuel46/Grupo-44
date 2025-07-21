@@ -3,6 +3,7 @@
 #include "ArchivosSiniestro.h"
 #include "ArchivosClientes.h"
 #include "ArchivosVehiculos.h"
+#include "ArchivosCompania.h"
 #include <iostream>
 #include <cstring>
 #include <ctime>
@@ -77,16 +78,57 @@ int ArchivoPoliza::agregarRegistro() {
     ArchivoVehiculo archivoVehiculo("vehiculos.dat");
     int patenteExiste = archivoVehiculo.buscarPatente(nuevaPoliza.getPatente());
     if (patenteExiste < 0) {
-        cout << "Error: el vehiculo con patente " << nuevaPoliza.getPatente() << " no existe." << endl;
-        cout << "Desea cargar vehiculo nuevo? (S/N): " << endl;
+        cout << "Error: el vehiculo con patente " << nuevaPoliza.getPatente() << " no existe. Favor de crear el vehiculo antes de crear la poliza." << endl;
+        cout << "Desea crear el vehiculo (S/N): " << endl;
         char respuesta;
         cin >> respuesta;
         respuesta = toupper(respuesta);
         if(respuesta == 'S'){
-        archivoVehiculo.agregarRegistro();
+           int resultadoVehiculo = archivoVehiculo.agregarRegistro(nuevaPoliza.getPatente());
+           if(resultadoVehiculo == -2) {
+               cout << "No se pudo crear el vehiculo. Operacion de agregar poliza cancelada." << endl;
+               system("pause");
+               return -4;
+           }
         }else if(respuesta == 'N'){
         system("pause");
         return -4;
+        }
+    }
+
+    nuevaPoliza.cargarCompania();
+
+    ArchivoCompania archivoCompania("companias.dat");
+    bool companiaExiste = false;
+
+    FILE *pCompania = fopen("companias.dat", "rb");
+    if (pCompania != nullptr) {
+        Compania com;
+        while (fread(&com, sizeof(Compania), 1, pCompania) == 1) {
+            if (com.getActivo() && strcmp(com.getNombre(), nuevaPoliza.getCompania()) == 0) {
+                companiaExiste = true;
+                break;
+            }
+        }
+        fclose(pCompania);
+    }
+
+    if (!companiaExiste) {
+        cout << "Error: la compania '" << nuevaPoliza.getCompania() << "' no existe. Favor de crear la compania antes de crear la poliza." << endl;
+        cout << "Desea crear la compania (S/N): " << endl;
+        char respuesta;
+        cin >> respuesta;
+        respuesta = toupper(respuesta);
+        if(respuesta == 'S'){
+           int resultadoCompania = archivoCompania.agregarRegistro();
+           if(resultadoCompania == -2) {
+               cout << "No se pudo crear la compania. Operacion de agregar poliza cancelada." << endl;
+               system("pause");
+               return -5;
+           }
+        }else if(respuesta == 'N'){
+        system("pause");
+        return -5;
         }
     }
 
@@ -285,12 +327,11 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
         return false;
     }
 
-    // Obtener fecha actual
     time_t ahora = time(0);
     tm* fechaActual = localtime(&ahora);
     int diaActual = fechaActual->tm_mday;
-    int mesActual = fechaActual->tm_mon + 1; // tm_mon va de 0 a 11
-    int anioActual = fechaActual->tm_year + 1900; // tm_year es años desde 1900
+    int mesActual = fechaActual->tm_mon + 1;
+    int anioActual = fechaActual->tm_year + 1900;
 
     bool hayVencimientos = false;
     system("cls");
@@ -316,7 +357,7 @@ bool ArchivoPoliza::listarProximosVencimientos(int diasAnticipacion) {
             int diferenciaDias = diasVencimiento - diasActuales;
 
             // Si vence dentro del rango especificado (incluyendo ya vencidas)
-            if (diferenciaDias <= diasAnticipacion && diferenciaDias >= -30) {
+            if (diferenciaDias <= diasAnticipacion && diferenciaDias >= -30) { //Te trae hasta 30 dias (el mes). 31 dias no trae
                 if (!hayVencimientos) {
                     cout << "Poliza - Cliente - Patente - Vencimiento - Estado" << endl;
                     cout << "----------------------------------------" << endl;
@@ -394,6 +435,7 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
         while (fread(&sin, sizeof(Siniestro), 1, pSiniestro) == 1) {
             if (sin.getActivo()) {
                 cout << "Siniestro ID: " << sin.getIdSiniestro() << " - ID Poliza: " << sin.getIDPoliza()
+                     << " - Descripcion: " << sin.getDescSiniestro()
                      << " - Monto: " << sin.getMontoReclamo() << endl;
             }
         }
@@ -422,31 +464,50 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
                         cantSiniestros++;
                         montoTotal += sin.getMontoReclamo();
                         cout << "COINCIDENCIA ENCONTRADA: Poliza " << pol.getNumeroPoliza()
-                             << " con Siniestro ID " << sin.getIdSiniestro() << endl;
+                             << " con Siniestro ID " << sin.getIdSiniestro()
+                             << " - Descripcion: " << sin.getDescSiniestro() << endl;
                     }
                 }
                 fclose(pSin);
             }
 
             if (tieneSiniestros) {
-                if (!hayResultados) {
-                    cout << "\nRESULTADOS FINALES:" << endl;
-                    cout << left << setw(10) << "Poliza"
-                    << "| " << setw(20) << "Cliente"
-                    << "| " << setw(10) << "Patente"
+            if (!hayResultados) {
+                cout << "\nRESULTADOS FINALES:" << endl;
+                cout << left << setw(10) << "Poliza"
+                << "| " << setw(20) << "Cliente"
+                << "| " << setw(10) << "Patente"
                     << "| " << setw(17) << "Cant.Siniestros"
-                    << "| " << "Monto Total" << endl;
+                    << "| " << setw(15) << "Monto Total"
+                    << "| " << "Desc. Siniestro" << endl;
 
-                        cout << "-------------------------------------------------------------------------------" << endl;
-                    hayResultados = true;
+                cout << "--------------------------------------------------------------------------------" << endl;
+                hayResultados = true;
+            }
+
+            int posCli = archivoCliente.buscarClienteDni(pol.getDni());
+            cli = archivoCliente.leerRegistro(posCli);
+            string nombreCompleto = string(cli.getNombre()) + " " + string(cli.getApellido());
+
+            string descSiniestro = "N/A";
+            FILE *pSinDesc = fopen("siniestros.dat", "rb");
+            if (pSinDesc != nullptr) {
+                Siniestro sinDesc;
+                while (fread(&sinDesc, sizeof(Siniestro), 1, pSinDesc) == 1) {
+                    if (sinDesc.getActivo() && sinDesc.getIDPoliza() == pol.getNumeroPoliza()) {
+                        descSiniestro = string(sinDesc.getDescSiniestro());
+                        break;
+                    }
                 }
-                    string nombreCompleto = string(cli.getNombre()) + " " + string(cli.getApellido()); // convertir los const char* a std::string antes de concatenar
+                fclose(pSinDesc);
+            }
 
-                    cout << left << setw(10) << pol.getNumeroPoliza()
-                    << "| " << setw(20) << nombreCompleto
-                    << "| " << setw(10) << pol.getPatente()
+            cout << left << setw(10) << pol.getNumeroPoliza()
+            << "| " << setw(20) << nombreCompleto
+            << "| " << setw(10) << pol.getPatente()
                     << "| " << right << setw(17) << cantSiniestros
                     << "| $" << setw(12) << right << (long long)montoTotal
+                    << "| " << setw(15) << descSiniestro
                     << endl;
             }
         }
@@ -455,14 +516,14 @@ bool ArchivoPoliza::listarPolizasConSiniestros() {
     fclose(pPoliza);
 
     if (!hayResultados) {
-        cout << "No hay polizas con siniestros registrados." << endl;
-        cout << "Esto significa que ninguna poliza tiene siniestros con IDs coincidentes." << endl;
+        cout << "No hay polizas activas para mostrar." << endl;
     }
 
     cout << "================================================================================" << endl;
     system("pause");
     return true;
 }
+
 
 float ArchivoPoliza::calcularRecaudacionAnual(int anio) {
     FILE *pPoliza = fopen(nombre, "rb");
@@ -605,7 +666,7 @@ bool ArchivoPoliza::exportarCSV(const char* nombreArchivo) {
     }
 
     // Escribir encabezados
-    archivo << "Numero_Poliza,DNI,Patente,Fecha_Inicio,Fecha_Vencimiento,Detalle_Cobertura,Importe_Mensual,Activo\n";
+    archivo << "Numero_Poliza,DNI,Patente,Compania,Fecha_Inicio,Fecha_Vencimiento,Detalle_Cobertura,Importe_Mensual,Activo\n";
 
     // Escribir datos
     while (fread(&obj, tamanioRegistro, 1, pPoliza) == 1) {
@@ -615,6 +676,7 @@ bool ArchivoPoliza::exportarCSV(const char* nombreArchivo) {
             archivo << obj.getNumeroPoliza() << ","
                    << obj.getDni() << ","
                    << obj.getPatente() << ","
+                   << obj.getCompania() << ","
                    << inicio.getDia() << "/" << inicio.getMes() << "/" << inicio.getAnio() << ","
                    << vencimiento.getDia() << "/" << vencimiento.getMes() << "/" << vencimiento.getAnio() << ","
                    << obj.getDetalleCobertura() << ","
